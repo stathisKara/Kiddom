@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #map_canvas {
+            height: 300px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="searchResults">
+    <p>
+        You searched for:
+    </p>
+    <input type="text" id="search_town" value="Αθήνα" placeholder="Town"><br>
+    <input type="text" id="search_area" value="Άγιοι Ανάργυροι" placeholder="Area"><br>
+    <input type="text" id="search_address" value="Κεφαλληνίας" placeholder="Address"><br>
+    <input type="text" id="search_address_number" value="40" placeholder="Address Number"><br>
+</div>
+
+<input type="submit" id="search" value="search"/>
+
+<div id="map_canvas" width="300" height="300"></div>
+
+<!--
+Tip: During development and testing, you can register a project in the Google API Console and use a generic,
+unrestricted API key. Before moving your app or website into production, you should secure your API key by
+adding browser restrictions to the key. Read more about restricting an API key.
+-->
+
+<script async defer src="https://maps.google.com/maps/api/js?key=AIzaSyBEcboHJ3HmCOtpiaUMW_0mKw0C20qPVpk"></script>
+<script type="text/javascript">
+    window.onload = function() {
+        var gmarkers = [];
+        var latlng = new google.maps.LatLng(0.0, 0.0),
+            options  = {
+                zoom               : 10,
+                mapTypeId          : google.maps.MapTypeId.TERRAIN,
+                center             : latlng,
+                streetViewControl  : true,
+                scaleControl       : true,
+                scrollwheel        : true,
+                mapTypeControl     : true,
+                overviewMapControl : true,
+                panControlOptions  : {
+                    position         : google.maps.ControlPosition.TOP_LEFT
+                },
+                zoomControlOptions : {
+                    position         : google.maps.ControlPosition.TOP_LEFT
+                }
+            };
+        map = new google.maps.Map(document.getElementById('map_canvas'), options),
+        geocoder = new google.maps.Geocoder(),
+        search = document.getElementById('search');
+
+        function codeAddress() {
+            //otan tha ginetai anazhthsh event me krithrio px thn perioxh, tha exoume polla apotelesmata opote tha prepei
+            //na yparxei ena loop poy tha dhmiourgei tous pollous markers gia na fanoun ston xarth.
+            //opws einai tr o kwdikas kalyptei thn periptwsh p o xrhsths pataei panw se ena event gia na dei tis
+            //plhrofories tou, opote i metablhth address pairnei timi apo thn html selida kateutheian
+            var address = document.getElementById("search_town").value + " " + document.getElementById("search_area").value + " " +
+                document.getElementById("search_address").value + " " + document.getElementById("search_address_number").value;
+
+            geocoder.geocode( { 'address': address}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    map.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                    gmarkers.push(marker);
+                } else {
+                    alert("Οι χάρτες της Google αντιμετώπισαν το εξής πρόβλημα: " + status);
+                }
+            });
+        }
+
+        function removeMarkers(){
+            var i;
+            for(i=0; i<gmarkers.length; i++){
+                gmarkers[i].setMap(null);
+            }
+        }
+
+        codeAddress();
+
+        search.onclick = function() {
+            removeMarkers();
+            codeAddress();
+        };
+    };
+</script>
+</body>
+</html>

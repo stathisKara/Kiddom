@@ -1,0 +1,316 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<!--
+Template Name: Maxisonix
+Author: <a href="http://www.os-templates.com/">OS Templates</a>
+Author URI: http://www.os-templates.com/
+Licence: Free to use under our free template licence terms
+Licence URI: http://www.os-templates.com/template-terms
+-->
+
+<head >
+    <title>Kiddom-FAQ</title>
+    <meta th:replace="/fragments/head :: head">
+
+    <link rel="stylesheet" th:href="@{css/reset.css}"> <!-- CSS reset -->
+    <link rel="stylesheet" th:href="@{css/style.css}"> <!-- Resource style -->
+    <script th:src="@{scripts/modernizr.js}" type="text/javascript"></script> <!-- Modernizr -->
+</head>
+
+<body id="top">
+<div th:replace="/fragments/navbar :: navbar('faq')"></div>
+
+<div class="wrapper row3">
+
+
+    <section class="cd-faq">
+        <ul class="cd-faq-categories">
+            <li><a class="selected" href="#basics">Γενικά</a></li>
+            <li><a href="#reservation">Κρατήσεις</a></li>
+            <li><a href="#account">Πληρωμές</a></li>
+            <!--<li><a href="#payments">Payments</a></li>-->
+            <!--<li><a href="#privacy">Privacy</a></li>-->
+        </ul> <!-- cd-faq-categories -->
+
+        <div class="cd-faq-items">
+            <ul id="basics" class="cd-faq-group">
+                <li class="cd-faq-title"><h2>Γενικά</h2></li>
+                <li>
+                    <a class="cd-faq-trigger" href="#0">Είμαι γονιός, πως εγγράφομαι</a>
+                    <div class="cd-faq-content">
+                        <p>
+                            Απλά πατάς εγγραφή απο την μπάρα στην κορυφή σελίδας. Συμπληρώνεις τα στοιχεία σου, πρώτα προσωπικές πληροφορίες και ύστερα τα στοιχεία του λογαριασμού σου, και γίνεσαι
+                            μέλος της οικογένειας του Kiddom.
+                        </p>
+                    </div> <!-- cd-faq-content -->
+                </li>
+
+                <li>
+                    <a class="cd-faq-trigger" href="#0">Είμαι πάροχος, πώς εγγράφομαι ;</a>
+                    <div class="cd-faq-content">
+                        <p>
+                           Διαλέγεις τη επιλογή "Πάροχοι" και απο εκεί μπορείς να συμπηρώσεις τα στοιχεία σου. Με δύο απλά βήματα, ενα για τα προσωπικά σου στοιχεία και
+                            ένα για τα στοιχεία του λογαριασμού σου. Αφού ένας admin μας εγκρίνει την εγγραφή σου είσαι έτοιμος να προσφέρεις διασκεδαστικές εμπειρίες σε νέους και νέες.
+                        </p>
+                    </div> <!-- cd-faq-content -->
+                </li>
+
+                <li>
+                    <a class="cd-faq-trigger" href="#0">Μπορώ να αλλάξω τα προσωπικά μου στοιχεία</a>
+                    <div class="cd-faq-content">
+                        <p>
+                            Αφου εγγραφείς μπορείς να πλοηγηθείς στο προφίλ σου μέσω της μπάρας στην κορυφή της σελίδας. Εκεί μπορείς να πλοηγηθείς στις προσωπικές σου
+                            πληροφορίες αλλα και να αλλάξεις τα στοιχεία σου.
+                        </p>
+                    </div> <!-- cd-faq-content -->
+                </li>
+
+                <li>
+                    <a class="cd-faq-trigger" href="#0">Σε τι ηλικίες απευθύνεται το Kiddom</a>
+                    <div class="cd-faq-content">
+                        <p>
+                            Το Kiddom είναι ένας ιστοχώρος που έχει στόχο να προσφέρει χαρά και γνώση σε παιδιά κάθε ηλικίας, ακόμα και αν είναι γονείς.
+                        </p>
+                    </div> <!-- cd-faq-content -->
+                </li>
+            </ul> <!-- cd-faq-group -->
+
+            <ul id="reservation" class="cd-faq-group">
+                <li class="cd-faq-title"><h2>Πολιτική κράτησης δραστηριότητας</h2></li>
+                <li>
+                    <a class="cd-faq-trigger" href="#0">Πώς γίνεται η κράτηση</a>
+                    <div class="cd-faq-content">
+                        <p>
+                            Από τη σελίδα της κάθε δραστηριότητας. Εκεί μπορείς να διαλέξεις την ημερομηνία και τη ώρα που σε ενδιαφέρει για την δραστηριότητα.
+                            Πατάς κράτηση και χρεώνεσαι τους αντίστοιχους πόντους
+                        </p>
+                    </div> <!-- cd-faq-content -->
+                </li>
+
+                <li>
+                    <a class="cd-faq-trigger" href="#0">Μπορώ να κρατήσω πολλές θέσεις σε μια δραστηριότητα</a>
+                    <div class="cd-faq-content">
+                        <p>
+                            Ναι! Κατά την επιλογή ημέρας και ώρα για τη δραστηριότητα προσφέρεται η δυνατότητα να κρατήσεις πολλές θέσεις.
+                        </p>
+                    </div> <!-- cd-faq-content -->
+                </li>
+
+                <li>
+                    <a class="cd-faq-trigger" href="#0">Μπορώ να ακυρώσω τις κρατήσεις μου;</a>
+                    <div class="cd-faq-content">
+                        <p>
+                            Έχεις δικαίωμα να ακυρώσεις κάποια απο τις κρατήσεις σου εντός διαστήματος μέχρι 36 ωρες πριν την διεξαγωγή της δραστηρίοτητας.
+                        </p>
+                    </div> <!-- cd-faq-content -->
+                </li>
+            </ul> <!-- cd-faq-group -->
+
+            <ul id="account" class="cd-faq-group">
+                <li class="cd-faq-title"><h2>Πολιτική πληρωμών</h2></li>
+                <li>
+                    <a class="cd-faq-trigger" href="#0">Πως πληρώνω;</a>
+                    <div class="cd-faq-content">
+                        <p>
+                            Το Kiddom, ακολουθεί μια πολιτική πληρωμής με πόντους. Έχεις τη δυνατότητα να αγοράσεις πόντους και στη συνέχεια να πληρώσεις με αυτούς
+                            για μια θέση σε μια δραστηριότητα. Οι πόντοι δεσμεύονται μέχρι και 36 ώρες πριν την δραστηριότητα, δηλαδή όσο είναι δυνατό να γίνει ακύρωση,
+                            και έπειτα αφαιρόυνται.
+                        </p>
+                    </div> <!-- cd-faq-content -->
+                </li>
+
+                <li>
+                    <a class="cd-faq-trigger" href="#0">Αν ακυρώσω μου επιστρέφονται οι πόντοι ;</a>
+                    <div class="cd-faq-content">
+                        <p>
+                            Σε περίπτωση ακύρωσης οι πόντοι επιστρέφονται αρκεί η ακύρωση να γίνει περισσότερο απο 36 ώρες πριν την εναρξη της δραστηριότητας.
+                            Σε περίπτωση ακύρωσης σε διάστημα λιγότερο των 36 ωρών απο την ώρα διεξαγωγής της δραστηριότητας, οι πόντοι αφαιρούνται.
+                        </p>
+                    </div> <!-- cd-faq-content -->
+                </li>
+
+                <li>
+                    <a class="cd-faq-trigger" href="#0">Πως μπορώ να δω τους πόντους μου;</a>
+                    <div class="cd-faq-content">
+                        <p>
+                           Στη σελίδα του Προφίλ, υπάρχει η επιλογή "Πορτοφόλι" στην οποία δίνεται μια αναφορά για την κατάσταση των πόντων σου.
+                            Μπορείς να δεσμευμένους πόντους σε κρατήσεις, πόντους που έχεις πληρώσει και φυσικά τους διαθέσιμους πόντους σου.
+                        </p>
+                    </div> <!-- cd-faq-content -->
+                </li>
+
+                <li>
+                    <a class="cd-faq-trigger" href="#0">Πώς αγοράζω πόντους;</a>
+                    <div class="cd-faq-content">
+                        Στο "Πορτοφόλι" στη σελίδα του προφίλ υπάρχει η επιλογή για αγορά πόντων. Στη συνέχεια απλά επιλέγεις τα πακέτα πόντων
+                        που επιθυμείς. Εισάγεις τα στοιχεία της πιστωτικής σου κάρτας και ολοκληρώνεις τη συναλλαγή σου.
+                    </div> <!-- cd-faq-content -->
+                </li>
+
+                <li>
+                    <a class="cd-faq-trigger" href="#0">Είμαι πάροχος, πότε θα πληρωθώ ;</a>
+                    <div class="cd-faq-content">
+                        <p>
+                            Ως πάροχος υπηρεσιών θα πληρώνεσαι στην αρχή κάθε μήνα το σύνολο των πόντων που σου αναλογούν μετατρεμμένο σε ευρώ.
+                        </p>
+                    </div> <!-- cd-faq-content -->
+                </li>
+            </ul> <!-- cd-faq-group -->
+
+            <!--<ul id="payments" class="cd-faq-group">-->
+                <!--<li class="cd-faq-title"><h2>Payments</h2></li>-->
+                <!--<li>-->
+                    <!--<a class="cd-faq-trigger" href="#0">Can I have an invoice for my subscription?</a>-->
+                    <!--<div class="cd-faq-content">-->
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit quidem delectus rerum eligendi mollitia, repudiandae quae beatae. Et repellat quam atque corrupti iusto architecto impedit explicabo repudiandae qui similique aut iure ipsum quis inventore nulla error aliquid alias quia dolorem dolore, odio excepturi veniam odit veritatis. Quo iure magnam, et cum. Laudantium, eaque non? Tempore nihil corporis cumque dolor ipsum accusamus sapiente aliquid quis ea assumenda deserunt praesentium voluptatibus, accusantium a mollitia necessitatibus nostrum voluptatem numquam modi ab, sint rem.</p>-->
+                    <!--</div> &lt;!&ndash; cd-faq-content &ndash;&gt;-->
+                <!--</li>-->
+
+                <!--<li>-->
+                    <!--<a class="cd-faq-trigger" href="#0">Why did my credit card or PayPal payment fail?</a>-->
+                    <!--<div class="cd-faq-content">-->
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur accusantium dolorem vel, ad, nostrum natus eos, nemo placeat quos nisi architecto rem dolorum amet consectetur molestiae reprehenderit cum harum commodi beatae necessitatibus. Mollitia a nostrum enim earum minima doloribus illum autem, provident vero et, aspernatur quae sunt illo dolorem. Corporis blanditiis, unde, neque, adipisci debitis quas ullam accusantium repudiandae eum nostrum quis! Velit esse harum qui, modi ratione debitis alias laboriosam minus eaque, quod, itaque labore illo totam aut quia fuga nemo. Perferendis ipsa laborum atque assumenda tempore aspernatur a eos harum non id commodi excepturi quaerat ullam, explicabo, incidunt ipsam, accusantium quo magni ut! Ratione, magnam. Delectus nesciunt impedit praesentium sed, aliquam architecto dolores quae, distinctio consectetur obcaecati esse, consequuntur vel sit quis blanditiis possimus dolorum. Eaque architecto doloremque aliquid quae cumque, vitae perferendis enim, iure fugiat, soluta aut!</p>-->
+                    <!--</div> &lt;!&ndash; cd-faq-content &ndash;&gt;-->
+                <!--</li>-->
+
+                <!--<li>-->
+                    <!--<a class="cd-faq-trigger" href="#0">Why does my bank statement show multiple charges for one upgrade?</a>-->
+                    <!--<div class="cd-faq-content">-->
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis provident officiis, reprehenderit numquam. Praesentium veritatis eos tenetur magni debitis inventore fugit, magnam, reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>-->
+                    <!--</div> &lt;!&ndash; cd-faq-content &ndash;&gt;-->
+                <!--</li>-->
+            <!--</ul> &lt;!&ndash; cd-faq-group &ndash;&gt;-->
+
+            <!--<ul id="privacy" class="cd-faq-group">-->
+                <!--<li class="cd-faq-title"><h2>Privacy</h2></li>-->
+                <!--<li>-->
+                    <!--<a class="cd-faq-trigger" href="#0">Can I specify my own private key?</a>-->
+                    <!--<div class="cd-faq-content">-->
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit quidem delectus rerum eligendi mollitia, repudiandae quae beatae. Et repellat quam atque corrupti iusto architecto impedit explicabo repudiandae qui similique aut iure ipsum quis inventore nulla error aliquid alias quia dolorem dolore, odio excepturi veniam odit veritatis. Quo iure magnam, et cum. Laudantium, eaque non? Tempore nihil corporis cumque dolor ipsum accusamus sapiente aliquid quis ea assumenda deserunt praesentium voluptatibus, accusantium a mollitia necessitatibus nostrum voluptatem numquam modi ab, sint rem.</p>-->
+                    <!--</div> &lt;!&ndash; cd-faq-content &ndash;&gt;-->
+                <!--</li>-->
+
+                <!--<li>-->
+                    <!--<a class="cd-faq-trigger" href="#0">My files are missing! How do I get them back?</a>-->
+                    <!--<div class="cd-faq-content">-->
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis provident officiis, reprehenderit numquam. Praesentium veritatis eos tenetur magni debitis inventore fugit, magnam, reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>-->
+                    <!--</div> &lt;!&ndash; cd-faq-content &ndash;&gt;-->
+                <!--</li>-->
+
+                <!--<li>-->
+                    <!--<a class="cd-faq-trigger" href="#0">How can I access my account data?</a>-->
+                    <!--<div class="cd-faq-content">-->
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus magni vero deserunt enim et quia in aliquam, rem tempore voluptas illo nisi veritatis quas quod placeat ipsa! Error qui harum accusamus incidunt at libero ipsum, suscipit dolorum esse explicabo in eius voluptates quidem voluptatem inventore amet eaque deserunt veniam dignissimos excepturi? Dolore, quo amet nostrum autem nemo. Sit nam assumenda, corporis ea sunt distinctio nostrum doloribus alias, beatae nesciunt dolore saepe consequuntur minima eveniet porro dolor officiis maiores ab obcaecati officia enim aliquam. Itaque fuga molestiae hic accusantium atque corporis quia id sequi enim vero? Hic aperiam sint facilis aliquam quia, accusamus tenetur earum totam enim est, error. Iusto, reiciendis necessitatibus molestias. Voluptatibus eos explicabo repellat nesciunt nam vero minima.</p>-->
+                    <!--</div> &lt;!&ndash; cd-faq-content &ndash;&gt;-->
+                <!--</li>-->
+
+                <!--<li>-->
+                    <!--<a class="cd-faq-trigger" href="#0">How can I control if other search engines can link to my profile?</a>-->
+                    <!--<div class="cd-faq-content">-->
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis provident officiis, reprehenderit numquam. Praesentium veritatis eos tenetur magni debitis inventore fugit, magnam, reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>-->
+                    <!--</div> &lt;!&ndash; cd-faq-content &ndash;&gt;-->
+                <!--</li>-->
+            <!--</ul> &lt;!&ndash; cd-faq-group &ndash;&gt;-->
+
+            <!--<ul id="delivery" class="cd-faq-group">-->
+                <!--<li class="cd-faq-title"><h2>Delivery</h2></li>-->
+                <!--<li>-->
+                    <!--<a class="cd-faq-trigger" href="#0">What should I do if my order hasn't been delivered yet?</a>-->
+                    <!--<div class="cd-faq-content">-->
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit quidem delectus rerum eligendi mollitia, repudiandae quae beatae. Et repellat quam atque corrupti iusto architecto impedit explicabo repudiandae qui similique aut iure ipsum quis inventore nulla error aliquid alias quia dolorem dolore, odio excepturi veniam odit veritatis. Quo iure magnam, et cum. Laudantium, eaque non? Tempore nihil corporis cumque dolor ipsum accusamus sapiente aliquid quis ea assumenda deserunt praesentium voluptatibus, accusantium a mollitia necessitatibus nostrum voluptatem numquam modi ab, sint rem.</p>-->
+                    <!--</div> &lt;!&ndash; cd-faq-content &ndash;&gt;-->
+                <!--</li>-->
+
+                <!--<li>-->
+                    <!--<a class="cd-faq-trigger" href="#0">How can I find your international delivery information?</a>-->
+                    <!--<div class="cd-faq-content">-->
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis provident officiis, reprehenderit numquam. Praesentium veritatis eos tenetur magni debitis inventore fugit, magnam, reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>-->
+                    <!--</div> &lt;!&ndash; cd-faq-content &ndash;&gt;-->
+                <!--</li>-->
+
+                <!--<li>-->
+                    <!--<a class="cd-faq-trigger" href="#0">Who takes care of shipping?</a>-->
+                    <!--<div class="cd-faq-content">-->
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis provident officiis, reprehenderit numquam. Praesentium veritatis eos tenetur magni debitis inventore fugit, magnam, reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>-->
+                    <!--</div> &lt;!&ndash; cd-faq-content &ndash;&gt;-->
+                <!--</li>-->
+
+                <!--<li>-->
+                    <!--<a class="cd-faq-trigger" href="#0">How do returns or refunds work?</a>-->
+                    <!--<div class="cd-faq-content">-->
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit quidem delectus rerum eligendi mollitia, repudiandae quae beatae. Et repellat quam atque corrupti iusto architecto impedit explicabo repudiandae qui similique aut iure ipsum quis inventore nulla error aliquid alias quia dolorem dolore, odio excepturi veniam odit veritatis. Quo iure magnam, et cum. Laudantium, eaque non? Tempore nihil corporis cumque dolor ipsum accusamus sapiente aliquid quis ea assumenda deserunt praesentium voluptatibus, accusantium a mollitia necessitatibus nostrum voluptatem numquam modi ab, sint rem.</p>-->
+                    <!--</div> &lt;!&ndash; cd-faq-content &ndash;&gt;-->
+                <!--</li>-->
+
+                <!--<li>-->
+                    <!--<a class="cd-faq-trigger" href="#0">How do I use shipping profiles?</a>-->
+                    <!--<div class="cd-faq-content">-->
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis provident officiis, reprehenderit numquam. Praesentium veritatis eos tenetur magni debitis inventore fugit, magnam, reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>-->
+                    <!--</div> &lt;!&ndash; cd-faq-content &ndash;&gt;-->
+                <!--</li>-->
+
+                <!--<li>-->
+                    <!--<a class="cd-faq-trigger" href="#0">How does your UK Next Day Delivery service work?</a>-->
+                    <!--<div class="cd-faq-content">-->
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis provident officiis, reprehenderit numquam. Praesentium veritatis eos tenetur magni debitis inventore fugit, magnam, reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>-->
+                    <!--</div> &lt;!&ndash; cd-faq-content &ndash;&gt;-->
+                <!--</li>-->
+
+                <!--<li>-->
+                    <!--<a class="cd-faq-trigger" href="#0">How does your Next Day Delivery service work?</a>-->
+                    <!--<div class="cd-faq-content">-->
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis provident officiis, reprehenderit numquam. Praesentium veritatis eos tenetur magni debitis inventore fugit, magnam, reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>-->
+                    <!--</div> &lt;!&ndash; cd-faq-content &ndash;&gt;-->
+                <!--</li>-->
+
+                <!--<li>-->
+                    <!--<a class="cd-faq-trigger" href="#0">When will my order arrive?</a>-->
+                    <!--<div class="cd-faq-content">-->
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis provident officiis, reprehenderit numquam. Praesentium veritatis eos tenetur magni debitis inventore fugit, magnam, reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>-->
+                    <!--</div> &lt;!&ndash; cd-faq-content &ndash;&gt;-->
+                <!--</li>-->
+
+                <!--<li>-->
+                    <!--<a class="cd-faq-trigger" href="#0">When will my order ship?</a>-->
+                    <!--<div class="cd-faq-content">-->
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis provident officiis, reprehenderit numquam. Praesentium veritatis eos tenetur magni debitis inventore fugit, magnam, reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>-->
+                    <!--</div> &lt;!&ndash; cd-faq-content &ndash;&gt;-->
+                <!--</li>-->
+            <!--</ul> &lt;!&ndash; cd-faq-group &ndash;&gt;-->
+        </div> <!-- cd-faq-items -->
+        <a href="#0" class="cd-close-panel">Close</a>
+    </section> <!-- cd-faq -->
+
+
+
+
+
+
+    <!--section class="mainbodyHoc hoc container clear">
+        <h3>Συχνές ερωτήσεις</h3>
+        <p>
+            <strong>Ερώτηση 1 : Μπορώ να κάνω ακύρωση της κράτησης μου? </strong> <br>
+            Δεχόμαστε ακυρώσεις κρατήσεων μέχρι 24 ώρες πριν την έναρξη της δραστηριότητας.
+        </p>
+
+        <p>
+            <strong>Ερώτηση 2 : Πώς θα αγοράσω πακέτο πόντων? </strong> <br>
+            Αφού εγγραφείτε στην εφαρμογή,επιλέξτε από το μενού του προφίλ σας την επιλογή Πορτοφόλι.
+            Ύστερα πατήστε το κουμπί "Αγορά Πόντων" με το οποίο θα ανακατευθυνθείτε σε νές σελίδα για να πραγματοποιήσετε τη συναλλαγή.
+
+        </p>
+
+    </section-->
+    </section>
+</div>
+
+<div th:replace="/fragments/foot :: foot"></div>
+<script th:src="@{/scripts/menuformobile.js}"></script>
+
+<script th:src="@{scripts/jqquery-3.2.1.js}" type="text/javascript"></script>
+<script th:src="@{scripts/jquery.mobile.custom.min.js}" type="text/javascript"></script>
+<script th:src="@{scripts/main.js}" type="text/javascript"></script> <!-- Resource jQuery -->
+
+</body>
+</html>

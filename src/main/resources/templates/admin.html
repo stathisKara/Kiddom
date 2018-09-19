@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Admin</title>
+    <meta th:replace="/fragments/head :: head">
+    <script th:src="@{/scripts/profile.js}"> </script>
+</head>
+<body id="top">
+<div th:replace="fragments/navbar :: navbar('admin')"></div>
+
+<div class="container">
+
+    <div class="navbar">
+        <!--<div class="tab">-->
+        <div class="tab">
+            <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'parentsView')"  th:id="${((param.tab != null) and (param.tab[0] == 'parentsView')) ? 'my_active' : ''}">
+                <i class="fa fa-user" id="my_active" style="color:#cc834f "></i> Στοιχεια Γονέων</button>
+            <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'providersView')" th:id="${((param.tab != null) and (param.tab[0] == 'providersView')) ? 'my_active' : ''}">
+                <i class="fa fa-user" style="color:#cc834f"></i>Στοιχεία Παρόχων</button>
+            <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'statistics')" th:id="${((param.tab != null)and (param.tab[0] == 'statistics')) ? 'my_active' : ''}">
+                <i class="fa fa-user" style="color:#cc834f"></i> Κρατήσεις γονέων<span class="badge"></span></button>
+        </div>
+        <!--</div>-->
+
+    </div>
+
+
+
+    <div id="parentsView" class=tabcontent" style="height: 600px; overflow: auto; margin:20px 20px 20px 20px;">
+
+        <!--/*Table with info about each parent user*/-->
+        <table class="table">
+            <tr>
+                <th>Όνομα Χρήστη</th>
+                <th>Όνομα</th>
+                <th>Επώνυμο</th>
+                <th>E-Mail</th>
+                <th>Πόλη</th>
+                <th>Περιοχή</th>
+                <th>Τηλέφωνο</th>
+                <th>Διαθέσιμοι Πόντοι</th>
+                <th>Ξοδεμένοι Πόντοι</th>
+                <th>Συναλλαγές</th>
+            </tr>
+            <tr th:each="parent,iterStat : ${parentsList}">
+                <td th:text="${parent.pk.user.username}">Όνομα Χρήστη</td>
+                <td th:text="${parent.name}">Όνομα</td>
+                <td th:text="${parent.surname}">Επώνυμο</td>
+                <td th:text="${parent.email}">E-Mail</td>
+                <td th:text="${parent.town}">Πόλη</td>
+                <td th:text="${parent.area}">Περιοχή</td>
+                <td th:text="${parent.telephone}">Τηλέφωνο</td>
+                <td th:text="${parent.availPoints}">Διαθέσιμοι Πόντοι</td>
+                <td th:text="${parent.totalPoints}-${parent.availPoints}">Ξοδεμένοι Πόντοι</td>
+                <td>
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" th:attr="data-target='#'+${parent.pk.user.username}">Περισσότερα</button>
+                </td>
+            </tr>
+        </table>
+
+        <!--/*Dynamic modal creation for each parent user*/-->
+        <div  th:each="parent,iterStat : ${parentsList}">
+            <!--/*@thymesVar id="parent" type="kiddom.model.ParentEntity"*/-->
+            <div class="modal fade" th:id="${parent.pk.user.username}" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Πληροφορίες Συναλλαγών</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table>
+                                <tr>
+                                    <th>Όνομα Χρήστη</th>
+                                    <th>Ημερομηνία αγοράς</th>
+                                    <th>Πόντοι</th>
+                                    <th>Ποσό</th>
+                                </tr>
+                                <!--/*@thymesVar id="report" type="kiddom.model.ParentReportsEntity"*/-->
+                                <tr th:each="report : ${parentReportsList[iterStat.index]}">
+                                    <td th:text="${parent.pk.user.username}"></td>
+                                    <td th:text="${report.date}"></td>
+                                    <td th:text="${report.cost}"></td>
+                                    <td th:text="${report.boughtPoints}"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Κλείσιμο</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="providersView" class=tabcontent" style="height: 600px; overflow: auto; margin:20px 20px 20px 20px;">
+
+        <!--/*Table with info about each provider user*/-->
+        <table class="table">
+            <tr>
+                <th>Όνομα Χρήστη</th>
+                <th>Όνομα</th>
+                <th>Επώνυμο</th>
+                <th>E-Mail</th>
+                <th>Πόλη</th>
+                <th>Περιοχή</th>
+                <th>Τηλέφωνο</th>
+                <th>ΑΦΜ</th>
+                <th>Πληρωμένοι Πόντοι</th>
+                <th>Χρωστούμενοι Πόντοι</th>
+                <th>Συναλλαγές</th>
+            </tr>
+            <tr th:each="provider,iterStat : ${providersList}">
+                <!--/*@thymesVar id="provider" type="kiddom.model.ProviderEntity"*/-->
+                <div th:if ="${(provider.approved==0)}" >
+                    <form method="POST" th:action="@{/accept/{provID}(provID=${provider.pk.user.username})}">
+                        <td th:text="${provider.pk.user.username}">Όνομα Χρήστη</td>
+                        <td th:text="${provider.name}">Όνομα</td>
+                        <td th:text="${provider.surname}">Επώνυμο</td>
+                        <td th:text="${provider.email}">E-Mail</td>
+                        <td th:text="${provider.town}">Πόλη</td>
+                        <td th:text="${provider.area}">Περιοχή</td>
+                        <td th:text="${provider.telephone}">Τηλέφωνο</td>
+                        <td th:text="${provider.tr}">ΑΦΜ</td>
+                        <td th:text="${provider.owedPoints}">Χρωστούμενοι</td>
+                        <td th:text="${provider.totalPoints}">Πληρωθέντες Πόντοι</td>
+                        <td><button class="btn btn-warning" type="submit">Έγκριση</button></td>
+                    </form>
+                </div>
+                <div th:if ="${(provider.approved==1)}" >
+                    <td th:text="${provider.pk.user.username}">Όνομα Χρήστη</td>
+                    <td th:text="${provider.name}">Όνομα</td>
+                    <td th:text="${provider.surname}">Επώνυμο</td>
+                    <td th:text="${provider.email}">E-Mail</td>
+                    <td th:text="${provider.town}">Πόλη</td>
+                    <td th:text="${provider.area}">Περιοχή</td>
+                    <td th:text="${provider.telephone}">Τηλέφωνο</td>
+                    <td th:text="${provider.tr}">ΑΦΜ</td>
+                    <td th:text="${provider.owedPoints}">Χρωστούμενοι</td>
+                    <td th:text="${provider.totalPoints}">Πληρωθέντες Πόντοι</td>
+                    <td>Εγκεκριμένος</td>
+                </div>
+                <!--<td>-->
+                    <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" th:attr="data-target='#'+${provider.pk.user.username}">Περισσότερα</button>-->
+                <!--</td>-->
+            </tr>
+        </table>
+    </div>
+
+
+    <div id="statistics" class="tabcontent"></div>
+
+
+
+    <div class="wrapper row3">
+        <main class="mainbodyHoc hoc container clear">
+            <!-- main body -->
+            <div class="center">
+                <div th:if ="${(items==null)}">
+                    <div class="alert alert-success" style="text-align: center;"> Δεν υπάρχουν ετοίματα Παρόχων</span>! <br>  </div>
+                </div >
+                <div th:if ="${(items!=null)}">
+                    <div class="row">
+                        <table class="table">
+                            <tr>
+                                <th>First name</th>
+                                <th>Last name</th>
+                                <th>Email</th>
+                            </tr>
+                            <tr th:each="provider : ${items}">
+                                <form method="POST" th:action="@{/accept/{provID}(provID=${provider.username})}">
+                                <td th:text="${provider.name}"></td>
+                                <td th:text="${provider.surname}"></td>
+                                <td th:text="${provider.email}"></td>
+                                    <td><button class="btn btn-warning" type="submit">Έγκριση</button></td>
+                                </form>
+                            </tr>
+                        </table>
+                    </div>
+                    <div th:replace="fragments/paginationbar :: paginationbar"></div>
+                </div>
+            </div>
+
+            <div class="center">
+                <div th:if ="${(reports==null)}">
+                    <div class="alert alert-success" style="text-align: center;"> Δεν υπάρχουν ετοίματα Παρόχων</span>! <br>  </div>
+                </div >
+                <div th:if ="${(reports!=null)}">
+                    <div class="row">
+                        <table class="table">
+                            <tr>
+                                <th>First name</th>
+                                <th>Last name</th>
+                                <th>Email</th>
+                            </tr>
+                            <tr th:each="report : ${reports}">
+                                <td th:text="${report.name}"></td>
+                                <td th:text="${report date}"></td>
+                                <td th:text="${reports.points}"></td>
+                                <td th:text="${report.cost}"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div th:replace="fragments/paginationbar :: paginationbar"></div>
+                </div>
+            </div>
+
+
+        </main>
+    </div>
+</div>
+
+<div th:replace="fragments/foot :: foot"></div>
+<script th:src="@{/scripts/menuformobile.js}"></script>
+
+<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/app.js}"></script>
+<script type="text/javascript">
+    document.getElementById("my_active").click();
+</script>
+</body>
+</html>

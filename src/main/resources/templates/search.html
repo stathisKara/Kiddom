@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<!--
+Template Name: Maxisonix
+Author: <a href="http://www.os-templates.com/">OS Templates</a>
+Author URI: http://www.os-templates.com/
+Licence: Free to use under our free template licence terms
+Licence URI: http://www.os-templates.com/template-terms
+-->
+<head >
+    <title>Kiddom-Search</title>
+    <meta th:replace="fragments/head :: head">
+    <script th:src="@{/scripts/select_categories.js}"></script>
+    <link th:href="@{/css/searchCss.css}" rel="stylesheet" type="text/css" media="all">
+</head>
+
+<body id="top" style="background-color: whitesmoke">
+
+<div th:replace="fragments/navbar :: navbar('search')"></div>
+
+
+    <!-- main body -->
+
+    <div class="mainDiv">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <hgroup class="mb20">
+                    <h1>Αποτελέσματα Αναζήτησης</h1>
+                    <h2 class="lead"><strong class="text-danger"></strong>Βρείτε τι σας Ταιριάζει <strong class="text-danger"></strong></h2>
+                </hgroup>
+            </div>
+        </div>
+    </div>
+        <!--<div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <h4 align="center" style="color:#cc834f;">Φιλτρα αναζητησης</h4>
+                <div class="container filtersContainer">
+                    <div class="row">
+                        <form class="form-horizontal" th:action="@{/search2}">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="type1" class="control-label"  style="text-align: left;">Κατηγορια Δραστηριοτητας</label>
+                                    <select th:field="*{categories}" class="form-control" name="category" id="type1" onchange="changeSelect( this.value )">
+                                        <option value="0">Οποιαδήποτε</option>
+                                        <option th:each="categorie : ${categories}"
+                                            th:name="${categorie}" th:value="${categorie}"
+                                            th:text="${categorie}">CategoryName</option>
+                                        </select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <div  id="type2">
+                                        <label for="type2" class="control-label"  style="text-align: left;">Υποκατηγορία</label>
+                                        <div th:each="subcategorie:${subcategories}" >
+                                            <select class="form-control" name="subcategory" style="display:none">
+                                                <option value="0">Οποιαδήποτε</option>
+                                                <option  th:each="subname : ${subcategorie}"
+                                                        th:value="${subnameStat.count}" th:name="${subname}"
+                                                        th:text="${subname}">SubName</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="col-lg-12">
+                                <div class="form-group" id="pricerange" >
+                                    <label for="pricerange" class="control-label"  style="text-align: left;">Εύρος τιμής (€)</label>
+                                    <div class="input-group" >
+                                        <label class="radio-inline">
+                                            <input type="radio" name="range" id="price1"  value="1"/> 0-10    </label>  </br>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="range" id="price2"  value="2"/>10-20 </label>  </br>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="range" id="price3" value="3"/>20-30 </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="text-center">
+                                    <button type="submit" title="Αναζήτηση" class="btn btn-default">
+                                        <i class="fa fa-search">
+                                        <em>Αναζήτηση Ξανά</em>
+                                        </i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>-->
+
+
+
+            <div class="container" th:if ="${(items!=null)}">
+                <div class= "col-lg-6 col-md-6 col-sm-6 col-xs-6" th:each="event : ${items} ">
+                    <div class="row"  style="margin:10px">
+                        <section class="col-xs-12 col-sm-9 col-md-12">
+                            <article class="search-result">
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <h2 class="heading"><a th:href="@{/activity/{eventID}(eventID=${event.id})}" th:text="${event.name}">Voluptatem, exercitationem, suscipit, distinctio</a></h2>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div>
+                                            <img th:src="@{images/demo/event1.jpg}" />
+                                        </div>
+                                        <!--<a href="#" th:title="${event.name}" class="thumbnail"><img th:src="@{images/demo/event1.jpg}" alt="Lorem ipsum" /></a>-->
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 excerpet border">
+                                            <!--<h4 class="heading"><span th:text="${event.date}"></span><span th:text="${event.price}"></span></h4>-->
+                                            <p th:text="${event.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, exercitationem, suscipit, distinctio, qui sapiente aspernatur molestiae non corporis magni sit sequi iusto debitis delectus doloremque.</p>
+                                    </div>
+
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <ul class="meta-search">
+                                            <li><i class="fa fa-user"></i> <a href="#"> <span th:text="${ event.owner }"></span></a></li>
+                                            <!--<li><i class="glyphicon glyphicon-calendar"></i> <span>02/15/2014</span></li>-->
+                                            <!--<li><i class="glyphicon glyphicon-time"></i> <span>4:28 pm</span></li>-->
+                                            <li><i class="glyphicon glyphicon-tags"></i> <span th:text="${event.category}"></span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><span th:text="${event.price}"></span><span>Πόντοι</span></div>
+                                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"> <span class="plus"><a th:href="@{/activity/{eventID}(eventID=${event.id})}">Περισσότερα <i class="glyphicon glyphicon-plus"></i></a></span></div>
+                                        </div>
+                                         <span class="clearfix borda"></span>
+                                    </div>
+                                </div>
+                                <span class="clearfix borda"></span>
+                            </article>
+                        </section>
+                    </div>
+                </div>
+
+                <div th:replace="fragments/paginationbar :: paginationbar"></div>
+                <div th:if ="${(items==null)}">
+                    <span type="">Δεν υπάρχουν δραστηριότητες με αυτά τα κριτήρια..</span>
+
+                </div>
+                </div>
+
+
+                <!--<h2 align="center">ΑΠΟΤΕΛΕΣΜΑΤΑ ΑΝΑΖΗΤΗΣΗΣ</h2>-->
+                <!--<div class="group results">-->
+
+                    <!--<div th:if ="${(items!=null)}">-->
+                        <!--<div th:each="event : ${items} " class=" borderedbox inspace-5">-->
+                            <!--<article  >-->
+                                <!--<figure><img th:src="@{images/demo/event1.jpg}"  style=" width:200px; height:190px;float: left; margin: 0px 15px 15px 0px;"alt="">-->
+                                    <!--<figcaption>-->
+                                        <!--<time datetime="2045-04-06T08:15+00:00"><strong>06</strong> <em>Απρ</em></time>-->
+                                    <!--</figcaption>-->
+                                <!--</figure>-->
+                                <!--<div class="txtwrap">-->
+                                    <!--<h4 class="heading"><span th:text="${event.name}"></span></h4>-->
+                                    <!--<ul class="nospace meta">-->
+                                        <!--<li><i class="fa fa-user"></i> <a href="#"><span th:text="${ event.owner }"></span></a></li>-->
+                                        <!--<li><i class="fa fa-tag"></i> <a href="#"><span th:text="${event.category}"></span></a></li>-->
+                                    <!--</ul>-->
+                                    <!--<p><span th:text="${event.description}">Εδω κατοικεί η περιγραφή της δρααστηριοτητας</span></p>-->
+                                    <!--<footer><a th:href="@{/activity/{eventID}(eventID=${event.id})}">Διαβάστε Περισσότερα &raquo;</a></footer>-->
+                                <!--</div>-->
+                            <!--</article>-->
+                        <!--</div></br>-->
+                    <!--</div>-->
+                    <!--</br></br>-->
+
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+
+    <div class="scrollable">
+
+    </div>
+
+
+    <!-- / main body -->
+        <div class="clear"></div>
+
+
+
+    <div th:replace="fragments/foot :: foot"></div>
+
+<script th:src="@{/scripts/menuformobile.js}"></script>
+<script>
+    jQuery.document.ready(function(){
+        $jQuery('.mycontainer').find('img').each(function(){
+            var imgClass = (this.width/this.height > 1) ? 'wide' : 'tall';
+            $(this).addClass(imgClass);
+        })
+    })
+</script>
+</body>
+</html>

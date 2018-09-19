@@ -1,0 +1,98 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<!--
+Template Name: Maxisonix
+Author: <a href="http://www.os-templates.com/">OS Templates</a>
+Author URI: http://www.os-templates.com/
+Licence: Free to use under our free template licence terms
+Licence URI: http://www.os-templates.com/template-terms
+-->
+
+<head>
+    <meta th:replace="/fragments/head :: head">
+    <title>Kiddom-CategoryReg</title>
+
+</head>
+
+<body id="top">
+<div th:replace="fragments/navbar :: navbar('category_submit')"></div>
+<div class="container">
+
+    <div th:if ="${(categories!=null)}"></div>
+    <select th:field="*{categories}">
+        <option th:each="categorie : ${categories}"
+                th:value="${categorie}"
+                th:text="${categorie}">Wireframe</option>
+    </select>
+    </div>
+    <div th:if ="${(categories!=null)}"></div>
+
+    <table>
+        <tr>
+            <th>Κατηγορίες</th>
+        </tr>
+        <tr th:each="category : ${categories}">
+            <td th:text="${category}"></td>
+        </tr>
+
+    </table>
+    </div>
+    <!--table th:if="${not #lists.isEmpty(categories)}">
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+        </tr>
+        <tr th:each="category : ${categories}">
+            <td th:text="${categories.name}">The first name</td>
+        </tr>
+    </table-->
+    <form class="well form-horizontal" th:action="@{/category_submit}" method="POST"  id="contact_form">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Δημιουργήστε μια κατηγορία!</legend>
+
+            <!-- Text input-->
+            <div th:if ="${(error != null)} ">
+                    <span th:text="${error}"></span>!
+
+            </div >
+            <div class="form-group">
+                <label class="col-md-4 control-label">Όνομα κατηγορίας</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="name" name="name" placeholder="Όνομα κατηγορίας" class="form-control"  type="text">
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label class="col-md-4 control-label">Όνομα υποκατηγορίας</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="pk.subname" name="pk.subname" placeholder="Όνομα υποκατηγορίας" class="form-control"  type="text">
+                    </div>
+                </div>
+            </div>
+            <br/>
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-warning" >Αποθήκευση κατηγορίας/υπό <span class="glyphicon glyphicon-send"></span></button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+<div th:replace="/fragments/foot :: foot"></div>
+<script th:src="@{/scripts/menuformobile.js}"></script>
+
+</body>
+
+</html>

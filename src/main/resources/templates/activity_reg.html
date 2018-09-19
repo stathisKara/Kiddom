@@ -1,0 +1,746 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<!--
+Template Name: Maxisonix
+Author: <a href="http://www.os-templates.com/">OS Templates</a>
+Author URI: http://www.os-templates.com/
+Licence: Free to use under our free template licence terms
+Licence URI: http://www.os-templates.com/template-terms
+-->
+
+<head>
+    <meta th:replace="/fragments/head :: head">
+    <title>Kiddom-ActivityReg</title>
+    <script th:src="@{/scripts/select_categories.js}"></script>
+
+    <style>
+        /* Style the buttons that are used to open and close the accordion panel */
+        /*button.accordion {*/
+            /*background-color: #eee;*/
+            /*color: #444;*/
+            /*cursor: pointer;*/
+            /*padding: 18px;*/
+            /*width: 100%;*/
+            /*text-align: left;*/
+            /*border: none;*/
+            /*outline: none;*/
+            /*transition: 0.4s;*/
+        /*}*/
+
+        /*!* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) *!*/
+        /*button.accordion.active, button.accordion:hover {*/
+            /*background-color: #ddd;*/
+        /*}*/
+
+        /*!* Style the accordion panel. Note: hidden by default *!*/
+        /*div.panel {*/
+            /*padding: 0 18px;*/
+            /*background-color: white;*/
+            /*max-height: 0;*/
+            /*overflow: hidden;*/
+            /*transition: max-height 0.2s ease-out;*/
+        /*}*/
+    </style>
+</head>
+
+<body id="top" style="background-color:#b7c1ae">
+<div th:replace="fragments/navbar :: navbar('activity_reg')"></div>
+
+
+<div class="container">
+
+    <!-- Form Name -->
+    <div th:if ="${(success != null) and (success == 'true')}">
+        <div class="alert alert-success" style="text-align: center;"> Η δημιουργία της εκδήλωσής σας ολοκληρώθηκε επιτυχώς! <br>  <a  th:href="@{/index}">Πίσω στην Αρχική</a></div>
+    </div >
+    <div th:if ="${(is_approved == 0)}">
+        <div class="alert alert-danger" style="text-align: center;"> Παρακαλώ περιμένετε την έγκριση της εγγραφής σας από τον διαχειριστή! <br>  <a  th:href="@{/index}">Πίσω στην Αρχική</a></div>
+    </div >
+
+    <div th:if ="${(is_approved == 1)}">
+        <h1 align="center" style="font-weight: bold; color: lightslategrey;">Δημιουργήστε μια δραστηριότητα!</h1>
+        <p/>
+        <br/>
+        <form class="well form-horizontal" enctype="multipart/form-data" th:action="@{/activity_reg}" method="POST"  id="contact_form">
+            <fieldset>
+
+
+                <!--Activity Name-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Όνομα δραστηριότητας</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            <input  name="name" required="required" placeholder="Όνομα δραστηριότητας" class="form-control"   maxlength="99" type="text">
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+            <!--Activity Description-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" >Περιγραφή δραστηριότητας</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                        <textarea rows="6" name="description" required="required" placeholder="Περιγραφή δραστηριότητας"  maxlength="300"class="form-control" ></textarea>
+                    </div>
+                </div>
+            </div>
+            <br/>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" >Πόσα slots θέλετε να δημιουργήσετε;</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>
+                            <input name="numOfSlots" placeholder="Αριθμός slots" required="required" class="form-control"  type="number" min="1">
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" >Τι διάρκεια θέλετε να έχει κάθε slot;</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                            <input name="slotDuration" placeholder="Διάρκεια slot-λεπτά" required="required" class="form-control"  type="number" min="10">
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" >Ώρα έναρξης δραστηριότητας</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                            <input name="startTime" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"  required="required"
+                                   placeholder="09:00" class="form-control"  type="text">
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" >Ώρα λήξης δραστηριότητας</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                            <input name="endTime" placeholder="10:00" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" text="Συμπληρώστε την ώρα στο απαιτούμενο φορμάτ" class="form-control" required="required" type="text">
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" >Τιμή ανά άτομο</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
+                            <input name="price" placeholder="5 (πόντοι)" min="1" class="form-control" required="required" type="number">
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" >Διαθέσιμες θέσεις</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input name="availability" placeholder="Διαθεσιμότητα" class="form-control" required="required" type="number" min="1">
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" >Ημερομηνία έναρξης δραστηριότητας</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        <input id="datepicker" name="date" placeholder="Ημερομηνία" class="form-control" required="required"type="text">
+                    </div>
+                </div>
+            </div>
+            <br/>
+                <!--pattern="[0-2]+[0-9]+[:]+[0-6]+[0-9]-->
+                <!--<span>Προσθέστε ενα timeslot</span></span><input type="button" value="+" onclick="addRow()">-->
+                <!--div id="dates">
+                    <label>Προσθέστε μια ημερομηνία</label><input type="input" id="hiddenField" placeholder ="dd-mm-yyyy" class="datepicker" /><input type="button" value="+" onclick="createDate()"/>
+                </div>
+                <br-->
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Πόλη</label>
+                    <div class="col-md-4 selectContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                            <select name="town" class="form-control selectpicker" >
+                                <option value=" " >Παρακαλώ επιλέξτε πόλη</option>
+                                <option>Αθήνα</option>
+                                <option>Aιγάλεω</option>
+                                <option >Άνω Λιόσια</option>
+                                <option >Κηφισσιά</option>
+                                <option> Χαλάνδρι</option>
+                                <option>Καισιαριανή</option>
+                                <option> Νέα Ιωνία</option>
+                                <option> Ελληνικό</option>
+                                <option> Γλυφάδα </option>
+                                <option >Βούλα</option>
+                                <option> Καλλιθεά</option>
+                                <option> Πειραιάς</option>
+                                <option> Περιστέρι</option>
+                                <option >Γέρακας</option>
+                                <option >Connecticut</option>
+                                <option >Delaware</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <!-- Select Basic -->
+
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Γειτονιά</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                            <input name="area" placeholder="Γειτονία" class="form-control" required="required" type="text">
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+
+
+                <!--<div class="form-group">-->
+                    <!--<label class="col-md-4 control-label">Περιοχή</label>-->
+                    <!--<div class="col-md-4 selectContainer">-->
+                        <!--<div class="input-group">-->
+                            <!--<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>-->
+                            <!--<select name="area" class="form-control selectpicker" >-->
+                                <!--<option value=" " >Παρακαλώ επιλέξτε περιοχή</option>-->
+                                <!--<option>Alabama</option>-->
+                                <!--<option>Alaska</option>-->
+                                <!--<option >Arizona</option>-->
+                                <!--<option >Arkansas</option>-->
+                                <!--<option >California</option>-->
+                                <!--<option >Colorado</option>-->
+                                <!--<option >Connecticut</option>-->
+                                <!--<option >Delaware</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <br/>
+
+                <!-- Text input-->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Οδός</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                            <input name="address" placeholder="Οδός" class="form-control" required="required" >
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <!-- Text input-->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Αριθμός</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <input name="number" placeholder="Αριθμός" class="form-control" required="required" min=1 type="text">
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <!-- Text input-->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Ταχυδρομικός κώδικας</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input name="postcode" placeholder="Ταχυδρομικός κώδικας" maxlength="5" size="5"class="form-control" required="required" type="number">
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <!-- Select Basic -->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Κατηγορία</label>
+                    <div class="col-md-4 selectContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                            <select th:field="*{categories}" class="form-control" name="category" id="type1" onchange="changeSelect( this.value )">
+                                <option value="0">Οποιαδήποτε</option>
+                                <option th:each="categorie : ${categories}"
+                                        th:value="${categorie}"
+                                        th:text="${categorie}">CategoryName</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <!-- Select Basic -->
+
+
+                <div class="form-group">
+                    <div id="type2">
+                    <label class="col-md-4 control-label">Υποκατηγορία 1</label>
+                    <div class="col-md-4 selectContainer">
+                        <div class="input-group" th:each="subcategorie:${subcategories}">
+                            <span class="input-group-addon" style="display:none"><i class="glyphicon glyphicon-list"></i></span>
+                            <select class="form-control" name="subcategory" style="display:none">
+                                <option value="0">Παρακαλώ επιλέξτε υποκατηγορία</option>
+                                <option th:each="subname : ${subcategorie}"
+                                        th:value="${subnameStat.count}"
+                                        th:text="${subname}">SubName</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <br/>
+
+                <div class="form-group">
+                    <div id="type3">
+                        <label class="col-md-4 control-label">Υποκατηγορία 2</label>
+                        <div class="col-md-4 selectContainer">
+                            <div class="input-group" th:each="subcategorie:${subcategories}">
+                                <span class="input-group-addon" style="display:none"><i class="glyphicon glyphicon-list"></i></span>
+                                <select class="form-control" name="subcategory" style="display:none">
+                                    <option value="0">Παρακαλώ επιλέξτε υποκατηγορία 2</option>
+                                    <option th:each="subname : ${subcategorie}"
+                                            th:value="${subnameStat.count}"
+                                            th:text="${subname}">SubName</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="form-group">
+                    <div id="type4">
+                        <label class="col-md-4 control-label">Υποκατηγορία 3</label>
+                        <div class="col-md-4 selectContainer">
+                            <div class="input-group" th:each="subcategorie:${subcategories}">
+                                <span class="input-group-addon" style="display:none"><i class="glyphicon glyphicon-list"></i></span>
+                                <select class="form-control" name="subcategory" style="display:none">
+                                    <option value="0">Παρακαλώ επιλέξτε υποκατηγορία 3</option>
+                                    <option th:each="subname : ${subcategorie}"
+                                            th:value="${subnameStat.count}"
+                                            th:text="${subname}">SubName</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+<!------------------------------------------------------------------------------------------------------------>
+
+                <!--<div class="form-group" id="type6">-->
+                    <!--<label class="col-md-4 control-label">Πόλη</label>-->
+                    <!--<div class="col-md-4 selectContainer">-->
+                        <!--<div class="input-group">-->
+                            <!--<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>-->
+                            <!--<select th:field="*{towns}" class="form-control" name="town" id="type6" onchange="changeSelect( this.value )">-->
+                                <!--<option value="0">Οποιαδήποτε</option>-->
+                                <!--<option th:each="town : ${towns}"-->
+                                        <!--th:value="${town.name}"-->
+                                        <!--th:text="${town.name}">'Όνομα πόλης</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<br/>-->
+
+                <!--&lt;!&ndash; Select Basic &ndash;&gt;-->
+
+
+                <!--<div class="form-group">-->
+                    <!--<div id="type7">-->
+                        <!--<label class="col-md-4 control-label">Περιοχή</label>-->
+                        <!--<div class="col-md-4 selectContainer">-->
+                            <!--<div class="input-group" th:each="area:${areas}">-->
+                                <!--<span class="input-group-addon" style="display:none"><i class="glyphicon glyphicon-list"></i></span>-->
+                                <!--<select class="form-control" name="area" style="display:none">-->
+                                    <!--<option value="0">Παρακαλώ επιλέξτε περιοχή</option>-->
+                                    <!--<option th:each="subarea : ${area}"-->
+                                            <!--th:value="${subareaStat.count}"-->
+                                            <!--th:text="${subarea.pk.area}">SubName</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<br/>-->
+
+            <div class="form-group" align="center">
+                <p/>
+                <label  class="photo_upload" >Φωτογραφίες δραστηριότητας (εώς 5)</label>
+                <input id="fileInput" type="file" name="uploadingFiles"  multiple>
+                <!--&lt;!&ndash;<label for="image0" class="photo_upload" >Φωτογραφίες δραστηριότητας</label>&ndash;&gt;-->
+                <!--&lt;!&ndash;<p/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<input name="image1" id="image1" type="file" accept="image/*" id="menu_images1" style="color: black;"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<p/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<input name="image2" id="image2" type="file" accept="image/*" id="menu_images2" style="color: black;"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<p/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<input name="image3" id="image3" type="file" accept="image/*" id="menu_images3" style="color: black;"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<p/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<input name="image4" id="image4" type="file" accept="image/*" id="menu_images4" style="color: black;"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<p/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<input name="image5" id="image5" type="file" accept="image/*" id="menu_images5" style="color: black;"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;img id="menu_image" class="preview_img" /&ndash;&gt;&ndash;&gt;-->
+                <!--<span class="help-block"></span>-->
+            </div>
+            <br/>
+
+                <!--<input value="pressme" type="button" onclick="validation()"/>-->
+
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-warning" >Αποθήκευση δραστηριότητας <span class="glyphicon glyphicon-send"></span></button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div>
+</div><!-- /.container -->
+<div th:replace="/fragments/foot :: foot"></div>
+
+
+<script th:src="@{scripts/jquery.min.js}"></script>
+<script th:src="@{scripts/jquery.backtotop.js}"></script>
+<script th:src="@{scripts/jquery.flexslider-min.js}"></script>
+<script th:src="@{scripts/jquery-ui.js}"></script>
+
+<script type="application/javascript">
+
+//    jQuery(".accordion").click(function() {
+//        openAccordion();
+//    });
+//
+//    function openAccordion() {
+//        var acc = document.getElementsByClassName("accordion");
+//        var i;
+//
+//        for (i = 0; i < acc.length; i++) {
+//            acc[i].onclick = function () {
+//                this.classList.toggle("active");
+//                var panel = this.nextElementSibling;
+//                if (panel.style.maxHeight) {
+//                    panel.style.maxHeight = null;
+//                } else {
+//                    panel.style.maxHeight = panel.scrollHeight + "px";
+//                }
+//            }
+//        }
+//    }
+
+    function createField(glyphicon, labeltxt, input){
+
+        var i = document.createElement("i");
+        i.setAttribute("class", "glyphicon " + glyphicon);
+
+        var span = document.createElement("span");
+        span.setAttribute("class","input-group-addon");
+        span.appendChild(i);
+
+        var div = document.createElement("div");
+        div.classList.add("input-group");
+        div.appendChild(span);
+        div.appendChild(input);
+
+        var div2 = document.createElement("div");
+        div2.setAttribute("class","col-md-4 inputGroupContainer");
+        div2.appendChild(div);
+
+        var label = document.createElement("label");
+        label.setAttribute("class","col-md-4 control-label");
+        label.innerHTML= labeltxt;
+
+        div = document.createElement("div");
+        div.setAttribute("class","form-group");
+        div.appendChild(label);
+        div.appendChild(div2);
+
+        return div;
+    }
+
+    function createInput(name, className, placeholder, type, value){
+        var input = document.createElement("input");
+        input.name=name;
+        input.placeholder=placeholder;
+        input.classList.add("form-control");
+        if(className)
+            input.classList.add(className);
+        input.setAttribute("type", type);
+        if (value){
+            input.value = value;
+            //input.value = value;
+        }
+
+        return input;
+    }
+
+    var counter =0;
+
+    function addRow(date, parent, mode) {
+
+
+        var panel = document.createElement("div");
+        panel.setAttribute("class", "panel-body" );
+
+        var input = createInput("program.["+counter.toString()+"].name", "", "Ημερομηνία έναρξης δραστηριότητας", "text", date);
+        var result = createField("glyphicon-calendar", "Ημερομηνία", input);
+        result.classList.add("hidden");
+        panel.appendChild(result);
+
+        input = createInput("program.["+counter.toString()+"].startTime", "startTime", "Ώρα έναρξης δραστηριότητας", "text", "");
+        result = createField("glyphicon-time", "Ώρα έναρξης δραστηριότητας", input);
+        panel.appendChild(result);
+
+        input = createInput("program.["+counter.toString()+"].endTime", "endTime", "Ώρα λήξης δραστηριότητας", "text", "");
+        result = createField("glyphicon-time", "Ώρα λήξης δραστηριότητας", input);
+        panel.appendChild(result);
+
+        input = createInput("program.["+counter.toString()+"].capacity","",  "Διαθέσιμες θέσεις", "number", "");
+        input.setAttribute("min","1");
+        result = createField("glyphicon-user", "Διαθέσιμες θέσεις", input);
+        panel.appendChild(result);
+
+        input = createInput("program.["+counter.toString()+"].price", "", "Τιμή ανά άτομο", "number","");
+        input.setAttribute("min","1");
+        result = createField("glyphicon-euro", "Τιμή ανά άτομο", input);
+        panel.appendChild(result);
+
+        counter++;
+
+        var div = document.createElement("div");
+        div.setAttribute("id", "timeslot"+counter.toString());
+        div.setAttribute("class", "panel-collapse collapse in");
+        div.appendChild(panel);
+
+        var a = document.createElement("a");
+        a.setAttribute("data-toggle", "collapse");
+        a.setAttribute("data-parent", parent);
+        a.href = "#timeslot"+counter.toString();
+        a.innerHTML="Timeslot " +counter.toString();
+
+        var h4 = document.createElement("h4");
+        h4.setAttribute("class", "panel-title");
+        h4.appendChild(a);
+
+        var heading = document.createElement("div");
+        heading.setAttribute("class", "panel-heading");
+        heading.appendChild(h4);
+
+        var divpanel = document.createElement("div");
+        divpanel.setAttribute("class", "panel panel-default");
+        divpanel.appendChild(heading);
+        divpanel.appendChild(div);
+//
+//        alert(date);
+//        alert(date.toString());
+        if (mode) {
+            var panelId = date.toString()+"-panel";
+            alert(date+"-panel");
+            document.getElementById(date+"-panel").appendChild(divpanel);
+//            document.getElementById(date.toString()+"-panel").appendChild(divpanel);
+//            document.getElementById(date.toString()+"-panel").appendChild(divpanel);
+        }
+        else
+            return divpanel;
+    }
+
+
+    function createDate(){
+        var date = jQuery("#hiddenField").val();
+        var panelContent = addRow(date, "#"+date+"-panel", 0);
+
+        var hoursPanelGroup = document.createElement("div");
+        hoursPanelGroup.setAttribute("id", date+"-panel");
+        hoursPanelGroup.setAttribute("class", "panel-group");
+        hoursPanelGroup.classList.add("timeslots");
+        hoursPanelGroup.appendChild(panelContent);
+
+        var msgSpan = document.createElement("span");
+        msgSpan.innerHTML="Προσθέστε ενα timeslot"
+
+        var addButton = document.createElement("input");
+        addButton.setAttribute("id", date+"-button");
+        addButton.setAttribute("class", "addButton");
+        addButton.setAttribute("onclick", "alerter(this)");
+//        addButton.setAttribute("style", "position:absolute");
+        addButton.type="button";
+        addButton.value = "+";
+
+        var panelBody = document.createElement("div");
+        panelBody.setAttribute("class", "panel-body");
+        panelBody.appendChild(msgSpan);
+        panelBody.appendChild(addButton);
+        panelBody.appendChild(hoursPanelGroup);
+
+        var panelFooter = document.createElement("div");
+        panelFooter.setAttribute("class", "panel-footer");
+
+        var collapseDiv = document.createElement("div");
+        collapseDiv.setAttribute("id", date.toString());
+        collapseDiv.setAttribute("class", "panel-collapse collapse in");
+        collapseDiv.appendChild(panelBody);
+        collapseDiv.appendChild(panelFooter);
+
+
+        var a = document.createElement("a");
+        a.setAttribute("data-toggle", "collapse");
+//        a.setAttribute("data-parent", "");
+        a.href = "#"+date;
+        a.innerHTML=date;
+
+        var h4 = document.createElement("h4");
+        h4.setAttribute("class", "panel-title");
+        h4.appendChild(a);
+
+        var heading = document.createElement("div");
+        heading.setAttribute("class", "panel-heading");
+        heading.appendChild(h4);
+
+
+        var divpanel = document.createElement("div");
+        divpanel.setAttribute("class", "panel panel-default");
+        divpanel.appendChild(heading);
+        divpanel.appendChild(collapseDiv);
+
+        var panelGroup = document.createElement("div");
+        panelGroup.setAttribute("class", "panel-group");
+        panelGroup.appendChild(divpanel);
+
+        document.getElementById('dates').appendChild(panelGroup);
+    }
+
+
+    function removeRow(input) {
+        document.getElementById('dates').removeChild( input.parentNode );
+    }
+
+    jQuery("#datepicker").datepicker({
+//        showOn: "button",
+//        buttonText: "day",
+        dateFormat: "dd-mm-yy",
+        onSelect: function(dateText, inst) {
+            $('.ui-datepicker').css('z-index', 99999999999999);
+//            var dateAsString = dateText; //the first parameter of this function
+//            var dateAsObject = jQuery(this).datepicker( 'getDate' ); //the getDate method
+
+        }
+    });
+
+    function alerter(button){
+        var date = button.id.replace("-button", "");
+        addRow(date, "#"+date+"-panel", 1);
+
+    }
+
+    jQuery("input").on("click", ".addButton", function(){
+        alert("123");
+    });
+
+    function validation(){
+        //alert("123");
+        var slotsPerDay = [];
+        var slots=0;
+        jQuery(".timeslots").each(function(){
+            slots++;
+            console.log(this);
+            console.log(this.getElementsByClassName("panel-default").length);
+
+            var panels = this.getElementsByClassName("panel-default");
+            var timeslot=panels[0];
+            console.log(timeslot);
+            for (var i=0; i<panels.length; i++) {
+                console.log("lala");
+            }
+            var panel= timeslot.lastChild.lastChild;
+            panel.childNodes[1];
+            console.log( panel.childNodes[1].lastChild.lastChild);
+            var wanted = jQuery(".startTime").get();
+
+             console.log(wanted.length);
+            slotsPerDay.push(wanted.length);
+//            console.log(starttime);
+//            var panelsLength = panels.length;
+//            for (var i=0; i<panels; i++){
+//
+//            }
+//            var div = this.getElementsByClassName(".panel-collapse");
+//             console.log(div);
+//            var div2 = div.getElementsByClassName(".panel-collapse")
+        });
+        var startHours = jQuery(".startTime").get();
+        console.log(startHours);
+        var endHours = jQuery(".endTime").get();
+        for (var i =0; i<slots; i++){
+            if (startHours[i].value>=endHours[i].value){
+                console.log(startHours[i]);
+                console.log(endHours[i]);
+                alert("123");
+                return false;
+            }
+            for (var j=0; j<slotsPerDay[i]; j++){
+                for (var k = j+1; k<slotsPerDay[i]; k++) {
+                    if(endHours[i].value>startHours[j].value) {
+                        alert("Invalid times");
+                        return false;
+                    }
+                    else if(endHours[j].value>startHours[i].value) {
+                        alert("invalid times");
+                        return false;
+                    }
+                    console.log(slotsPerDay[i]);
+                }
+            }
+        }
+        alert("all good");
+        return true;
+
+//        var doc = jQuery("#dates .panel-group");
+//        console.log(doc);
+//        var notes = doc.childNodes[0];
+//        console.log(notes[0])
+//        console.log(notes.childNodes.length);
+//        for (var i = 0; i < doc.childNodes.length; i++) {
+//            console.log(notes[i]);
+//            for (var j =0; j <notes[i].childNodes.length; j++){
+//                console.log(notes[i][j]);
+//            }
+//        }
+    }
+
+
+</script>
+<script th:src="@{/scripts/menuformobile.js}"></script>
+<script th:src="@{/scripts/Select_Areas.js}"></script>
+</body>
+
+</html>

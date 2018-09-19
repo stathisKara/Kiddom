@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+Template Name: Maxisonix
+Author: <a href="http://www.os-templates.com/">OS Templates</a>
+Author URI: http://www.os-templates.com/
+Licence: Free to use under our free template licence terms
+Licence URI: http://www.os-templates.com/template-terms
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head >
+  <title>Kiddom-ErrorPage</title>
+  <meta th:replace="fragments/head :: head">
+</head>
+<body id="top">
+<!-- ################################################################################################ -->
+<div th:replace="fragments/navbar :: navbar('error_page')"></div>
+
+
+<div class="wrapper row3">
+  <section class="mainbodyHoc hoc container clear">
+    <div th:if ="${(param.error_code != null) and (param.error_code[0] == 'reg')}">
+      <div class="alert alert-danger" style="text-align: center;"> Προέκυψε κάποιο λάθος κατά την εγγραφή σας. <br>  <a  th:href="index">Πίσω στην Αρχική</a></div>
+    </div >
+
+    <div th:if ="${(param.error_code != null) and (param.error_code[0] == 'anon')}">
+      <div class="alert alert-danger" style="text-align: center;"> Δεν έχετε δικαίωμα για αυτή την ενέργεια. <br>  <a  th:href="index">Πίσω στην Αρχική</a></div>
+    </div >
+
+    <div th:if ="${(param.error_code != null) and (param.error_code[0] == 'not_prov')}">
+      <div class="alert alert-danger" style="text-align: center;"> Παρακαλώ εγγραφείτε ως πάροχος για αυτή την ενέργεια. <br>  <a  th:href="index">Πίσω στην Αρχική</a></div>
+    </div >
+
+    <div th:if ="${(param.error_code ==null)}">
+    <p>Ούπς, κάτι πήγε στραβά...Παρακαλώ προσπαθήστε ξανα!</p>
+    </div>
+  </section>
+</div>
+<!--###################################### -->
+
+<div th:replace="fragments/foot :: foot"></div>
+<script th:src="@{/scripts/menuformobile.js}"></script>
+</body>
+</html>

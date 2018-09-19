@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta th:replace="/fragments/head :: head">
+    <title>Kiddom-Activity</title>
+    <link th:href="@{/css/lightbox.css}" rel="stylesheet" type="text/css" media="all">
+</head>
+
+<body>
+
+
+
+
+
+    <div th:replace="/fragments/navbar :: navbar('activity')"></div>
+
+    <div id="activity" style="max-width: 80%;margin: auto">
+        <div class="row">
+                <!--Title-->
+                <div class="col-lg-12">
+                    <h1><span th:text="${event.name}"></span></h1>
+                </div>
+            <div class="col-lg-12">
+                <div th:if="${(availability==1)}">
+                    <span class="alert alert-warning">Εγγραφείτε πρώτα για να κάνετα κράτηση ..</span>
+                </div>
+                <div th:if="${(availability==2)}">
+                    <span class="alert alert-warning">Εγγραφείτε ως γονέας πρώτα ..</span>
+                </div>
+                <div th:if="${(availability==3)}">
+                    <span class="alert alert-danger">Το υπόλοιπό σας δεν είναι επαρκές ..</span>
+                </div>
+                <div th:if ="${(numOfRatings == 0)}">
+                    <h1>Δεν υπάρχουν βαθμολογίες για αυτή την εκδήλωση ακόμα.</h1>
+                </div>
+                <div th:if ="${(numOfRatings == 1)}">
+                    <h1>Βαθμολογία εκδήλωσης:&nbsp;<span th:text="${rating}"></span></h1>
+                </div>
+            </div>
+
+                <!--Images preview for activity-->
+                <div id="act-imgs" class="content col-lg-7 col-md-12 col-sm-12 col-xs-12">
+                    <div style="height: 500px;">
+                        <div class="row" th:if="${(photos1 != null)}">
+                            <div th:each="photo1 : ${photos1}">
+                                <a  data-lightbox="image-1" data-title="My caption">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><div class="act-img"><img style="width: auto" th:src="${photo1}" alt="img here"></div></div>
+                                </a>
+                            <!--<a  data-title="My caption">-->
+                            <!--<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><div class="act-img"><img style="width: auto" th:src="@{/images/activity/no_upload_image.jpg}" alt="img here"></div></div>-->
+                            <!--</a>-->
+                            </div>
+                        </div>
+                        <div class="row" th:if="${(photos2 != null)}">
+                            <div th:each="photo1 : ${photos2}">
+                                <a  data-lightbox="image-1" data-title="My caption">
+                                <div class="col-lg-4 col-md-4 col-sm-4"><div class="act-img"><img style="width: auto"th:src="${photo1}" alt="img here"></div></div>
+                                </a>
+                            <!--<a  data-lightbox="image-1" data-title="My caption">-->
+                                <!--<div class="col-lg-4 col-md-4 col-sm-4"><div class="act-img "><img style="width: auto" th:src="@{/images/activity/no_upload_image.jpg}" alt="img here"></div></div>-->
+                            <!--</a>-->
+                            <!--<a  data-lightbox="image-1" data-title="My caption">-->
+                                <!--<div class="col-lg-4 col-md-4 col-sm-4"><div class="act-img" style="position: relative"><img style="width: auto" th:src="@{/images/activity/no_upload_image.jpg}" alt="img here">-->
+                                <!--<div class="overlay" style="  position: absolute;bottom: 0%;left: 0;right: 0; background-color: rgba(255, 255, 255, 0.1); overflow: hidden; width: auto;-->
+                                <!--height:100%; margin:auto;  pointer-events:none;  transition: .5s ease;pointer-events:none;">-->
+                                    <!--<div class="text" style="white-space: nowrap;  color: white;  font-size: 20px;  position: absolute;  overflow: hidden;  top: 50%;  left: 50%; color: #fff;-->
+                                 <!--text-shadow: 2px 2px 3px #000;  transform: translate(-50%, -50%);  -ms-transform: translate(-50%, -50%);">More Photos</div></div>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                            <!--</a>-->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            
+                <!--Map-->
+                <div class="side-content col-lg-5 col-md-12 col-xs-12">
+                    <div style="height:500px">
+                    <h1 style="font-size: large; text-decoration: none">Βρείτε μας στον Χάρτη</h1>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-9">
+
+                            <div id="side-content" style="height: 350px">
+                                <div id="googleMap" style="width:100%;height:100%;"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-3">
+
+                            <span th:text="${event.address}" , th:text="${event.number}"></span>
+                            <span th:text="${event.town}" , th:text="${event.area}"></span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!--Internal NavBar-->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <nav class="navbar">
+                        <div>
+                            <ul>
+                                <li class="active"><a href="#description">Γενικά</a></li>
+                                <li class=""><a th:href="@{#calendar}" id="services-link">Κρατήσεις</a></li>
+                                <li class=""><a href="#ratings" id="ratings-link">Αξιολογήσεις</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+        </div>
+
+        <!--Description-->
+        <div class="row">
+            <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <p id="description">
+                    <span th:text="${event.description}"></span>
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div id="calendar" class="col-lg-6 col-md-12 col-sm-12 col-xs-12 " style="display: none"></div>
+            <div id="datetime" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div th:if ="${(program!=null)}">
+                <table style="text-align: center">
+                    <thead>
+                        <tr>
+                            <th>Ώρα έναρξης</th>
+                            <th>Ώρα λήξης</th>
+                            <th>Ελεύθερες θέσεις</th>
+                            <th>Κόστος-Πόντοι</th>
+                            <th>Θέσεις</th>
+                            <th></th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                    <tr th:each="program_num : ${program}">
+                        <form method="POST" th:action="@{/reserve/{programID}(programID=${program_num.id})}">
+                            <td th:text="${program_num.startTime}">9.00</td>
+                            <td th:text="${program_num.endTime}">10.00</td>
+                            <td th:text="${program_num.availability}">20</td>
+                            <td th:text="${program_num.price}">10</td>
+                            <td> <input field="num" name="num" id="num" required="required" type="number" ></td>
+                            <td><button type="submit"  class="btn btn-default">Κράτηση</button> </td>
+                        </form>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+
+            </div>
+        </div>
+
+        <!--Ratings-->
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12" id="ratings">
+                <div class="page-header">
+                    <h3 class="reviews">Πέιτε μας τη γνώμη σας</h3>
+                </div>
+                <div class="comment-tabs">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#comments-logout" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Κριτικές</h4></a></li>
+                        <li><a href="#add-comment" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Προσθήκη Κριτικής</h4></a></li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="comments-logout">
+                            <ul class="media-list">
+                                <div th:if ="${(comments!=null)}">
+                                <li th:each="comment : ${comments}" class="media">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object img-circle" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" alt="profile">
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="well well-lg">
+                                            <h4 class="media-heading text-uppercase reviews"> <span th:text="${comment.username}"></h4>
+                                            <ul class="media-date text-uppercase reviews list-inline">
+                                            </ul>
+                                            <p class="media-comment">
+                                            <span th:text="${comment.comment}"></span>
+                                            </p>
+                                            <div class="rate">
+                                                <input type="radio" id="1-star5" name="rate" value="5" checked/>
+                                                <label for="1-star5" title="text">5 stars</label>
+                                                <input type="radio" id="1-star4" name="rate" value="4" />
+                                                <label for="1-star4" title="text">4 stars</label>
+                                                <input type="radio" id="1-star3" name="rate" value="3" />
+                                                <label for="1-star3" title="text">3 stars</label>
+                                                <input type="radio" id="1-star2" name="rate" value="2" />
+                                                <label for="1-star2" title="text">2 stars</label>
+                                                <input type="radio" id="1-star1" name="rate" value="1" />
+                                                <label for="1-star1" title="text">1 star</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                </div>
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="add-comment">
+                            <form th:action="@{/comment/{eventID}(eventID=${event.id})}" method="post" class="form-horizontal" id="commentForm" role="form">
+                                <div class="form-group">
+                                    <label for="comment" class="col-sm-2 control-label">Σχόλιο</label>
+                                    <div class="col-sm-10">
+                                        <textarea type="text" class="form-control" field="comment" name="comment" id="comment" rows="5"></textarea>
+                                    </div>
+                                </div>
+                                <p> Αξιολόγηση</p>
+                                <div class="rate">
+                                    <input type="radio" id="star5" name="rate" value="5" checked/>
+                                    <label for="1-star5" title="text">5 stars</label>
+                                    <input type="radio" id="star4" name="rate" value="4" />
+                                    <label for="1-star4" title="text">4 stars</label>
+                                    <input type="radio" id="star3" name="rate" value="3" />
+                                    <label for="1-star3" title="text">3 stars</label>
+                                    <input type="radio" id="star2" name="rate" value="2" />
+                                    <label for="1-star2" title="text">2 stars</label>
+                                    <input type="radio" id="star1" name="rate" value="1" />
+                                    <label for="1-star1" title="text">1 star</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment"><span class="glyphicon glyphicon-send"></span>Υποβολή</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+
+    </div>
+    <div style="clear: both;"></div>
+
+    <div th:replace="/fragments/foot :: foot"></div>
+
+<script th:src="@{/scripts/jquery.min.js}"></script>
+<script th:src="@{/scripts/jquery.backtotop.js}"></script>
+<script th:src="@{/scripts/jquery.flexslider-min.js}"></script>
+<script th:src="@{/scripts/jquery-ui.js}"></script>
+    <script>
+        $('#calendar').datepicker({
+            inline: true,
+            firstDay: 1,
+            showOtherMonths: true,
+            dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            altField: "#dateHidden",
+            // The format you want
+            altFormat: "yy-mm-dd",
+            // The format the user actually sees
+            dateFormat: "dd/mm/yy",
+            onSelect: function (date) {
+                $("#datetime").show();
+                // Your CSS changes, just in case you still need them
+            }
+        });
+    </script>
+    <script>
+
+        var map = undefined;
+        var marker = undefined;
+        var position = [43, -89];
+
+        function myMap() {
+
+            var latlng = new google.maps.LatLng(position[0], position[1]);
+            var myOptions = {
+                zoom: 8,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById("googleMap"), myOptions);
+
+            marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title: "Your current location!"
+            });
+
+            google.maps.event.addListener(map, 'click', function(me) {
+                var result = [me.latLng.lat(), me.latLng.lng()];
+                transition(result);
+            });
+        }
+
+        var numDeltas = 100;
+        var delay = 10; //milliseconds
+        var i = 0;
+        var deltaLat;
+        var deltaLng;
+        function transition(result){
+            i = 0;
+            deltaLat = (result[0] - position[0])/numDeltas;
+            deltaLng = (result[1] - position[1])/numDeltas;
+            moveMarker();
+        }
+
+        function moveMarker(){
+            position[0] += deltaLat;
+            position[1] += deltaLng;
+            var latlng = new google.maps.LatLng(position[0], position[1]);
+            marker.setPosition(latlng);
+            if(i!=numDeltas){
+                i++;
+                setTimeout(moveMarker, delay);
+            }
+        }
+
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLbijC5kVnnJ5kL_j8zRo-5afCMVrYFdE&callback=myMap"></script>
+    <script th:src="@{/scripts/lightbox.js}" ></script>
+    <script th:src="@{/scripts/menuformobile.js}"></script>
+
+</body>
+</html>

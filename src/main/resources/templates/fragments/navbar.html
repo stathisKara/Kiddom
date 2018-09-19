@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+    <div th:fragment="navbar(module)">
+        <style>
+            /* Dropdown menu background color*/
+
+            .topmenu > .dropdown > .dropdown-menu ul {     background-color:rgba(0,0,0,.6);  }
+
+            /* Dropdown menu font color*/
+
+            .topmenu >.dropdown > .dropdown-menu li{  border-right: none;   }
+            .topmenu >.dropdown > .dropdown-menu >li >a{ color: #8facf4 !important;   }
+        </style>
+        <div id = "topNavbar" class="bgded overlay" >
+            <!-- ################################################################################################ -->
+            <div class="wrapper row0">
+                <div id="topbar" class="hoc clear">
+                    <div class=" fl_left  ">
+                        <form class="navbar-form" role="search" th:action="@{/search2}" method="POST"  id="freetextform">
+                            <div class=" input-group" >
+                                <input type="text" name="text" class="form-control " placeholder="Τι θα ψάξουμε σήμερα;" style="height:40px; text-align: center">
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-lgrr" style="	right: 0;height: 40px;width: 40px;	border: none;cursor: pointer;border-radius: 0;	font-size : 16px;	margin-left:2px;">
+                                        <i class="fa fa-search" ></i>
+                                    </button>
+                                 </span>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- ################################################################################################ -->
+                    <div id="topmenu" class="fl_right">
+                    <ul>
+                            <div style="font-size:13px;" th:if ="${(uname == null) or (type==null)} ">
+                                <li></li>
+                                <li>
+                                    <a style="font-size:13px;" data-toggle="modal" href="#login_overlay">Σύνδεση</a>
+                                </li>
+                                <li th:classappend="${module == 'register' ? 'active' : ''}">
+                                    <a style="font-size:13px;" th:href="@{/register}">Εγγραφή</a></li>
+                                </li>
+                                <li th:classappend="${module == 'register_prov' ? 'active' : ''}">
+                                    <a style="font-size:13px;" th:href="@{/register_prov}">Πάροχοι</a>
+                                </li>
+                            </div >
+                            <div style="font-size:13px;" th:if ="${(uname != null) } ">
+                                <li></li>
+                                <li>
+                                    <strong><span th:text="${uname}"></span></strong>
+                                </li>
+                                <li>
+                                <a style="font-size:13px;" href="logout">Αποσύνδεση</a></li>
+                                </li>
+                            </div >
+                    </ul>
+                    </div>
+                    <!-- ################################################################################################ -->
+                </div>
+            </div>
+            <!-- ################################################################################################ -->
+            <!-- ################################################################################################ -->
+            <!-- ################################################################################################ -->
+
+
+            <div class="wrapper row1">
+                <header id="header" class="hoc clear">
+                    <!-- ################################################################################################ -->
+                    <div id="logo" class="fl_left">
+                        <h1><a th:href="@{/index}">Kiddom</a></h1>
+                    </div>
+                    <nav id="mainav" class="fl_right">
+                        <ul class="clear">
+                            <li th:classappend="${module == 'index' ? 'active' : ''}">
+                                <a  th:href="@{/index}"><i class="fa fa-lg fa-home"></i>&nbsp;Αρχική</a>
+                            </li>
+                            <li th:if ="${(uname != null) and (type=='2')}" th:classappend="${module == 'profile_prov' ? 'active' : ''}"><a class="drop" >Το προφίλ μου</a>
+                                <ul >
+                                    <li ><a th:href="@{/profileProvider(tab=elements)}">Στοιχεία Χρήστη</a></li>
+                                    <li ><a th:href="@{/profileProvider(tab=wallet)}">Πορτοφόλι</a></li>
+                                    <li ><a th:href="@{/profileProvider(tab=current_activities)}">Επισκόπηση Δραστηριοτήτων</a></li>
+                                    <li ><a th:href="@{/profileProvider(tab=older_activities)}">&nbsp;Παλαιότερες Δραστηριότητες</a></li>
+                                </ul>
+                            </li>
+                            <li th:if ="${(uname != null) and (type=='1')}" th:classappend="${module == 'profile' ? 'active' : ''}"><a class="drop" >Το προφίλ μου</a>
+                                <ul >
+                                    <li><a th:href="@{/profile(tab=elements)}">&nbsp; Στοιχεία Χρήστη</a></li>
+                                    <li><a th:href="@{/profile(tab=wallet)}">&nbsp; Πορτοφόλι</a></li>
+                                    <li><a th:href="@{/profile(tab=reservations)}">&nbsp; Κρατήσεις</a></li>
+                                    <li><a th:href="@{/profile(tab=old_activities)}">&nbsp; Παλαιότερες Κρατήσεις</a></li>
+                                </ul>
+                            </li>
+                            <li th:if ="${(uname != null) and (type=='2')}" th:classappend="${module == 'activity_reg' ? 'active' : ''}">
+                                <a  th:href="@{/activity_reg}">Δημιουργία Δραστηριότητας</a>
+                            </li>
+                            <li th:if ="${(uname != null) and (type=='1')}" th:classappend="${module == 'buypoints' ? 'active' : ''}">
+                                <a  th:href="@{/buypoints}">Αγορά Πόντων</a>
+                            </li>
+                            <li th:if ="${(uname != null) and (type=='0')}">
+                                <a  th:href="@{/admin(tab=parentsView)}">Σελίδα διαχείρισης</a>
+                            </li>
+                            <li th:classappend="${module == 'about' ? 'active' : ''}">
+                                <a  th:href="@{/about}">Σχετικά με εμάς</a>
+                            </li>
+                            <li th:classappend="${module == 'faq' ? 'active' : ''}">
+                                <a  th:href="@{/faq}">FAQ</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- ################################################################################################ -->
+                </header>
+                <div >
+                    <div id="breadcrumb" class="hoc clear">
+                        <!-- ################################################################################################ -->
+                        <ul>
+                            <li><a th:href="@{/index}">Αρχική</a></li>
+                            <span th:if ="${(module != null)} ">
+                                 <span th:if="${(module=='admin')}">
+                                    <li>Σελίδα διαχειριστή</li>
+                                </span>
+                                <span th:if="${(module=='about')}">
+                                    <li>Σχετικά με εμάς</li>
+                                </span>
+                                <span th:if="${(module=='faq')}">
+                                    <li>FAQ</li>
+                                </span>
+                                <span th:if="${(module=='activity_reg')}">
+                                    <li>Δημιουργία Δραστηριότητας</li>
+                                </span>
+                                <span th:if="${(module=='activity')}">
+                                    <li>Δραστηριότητα</li>
+                                </span>
+                                <span th:if="${(module=='register')}">
+                                    <li>Εγγραφή γονέα</li>
+                                </span>
+                                <span th:if="${(module=='register_prov')}">
+                                    <li>Εγγραφή παρόχου</li>
+                                </span>
+                                <span th:if="${(module=='search')}">
+                                    <li>Αναζήτηση</li>
+                                </span>
+                                <span th:if="${(module=='profile')}">
+                                    <li>Προφίλ γονέα</li>
+                                </span>
+                                <span th:if="${(module=='profile_prov')}">
+                                    <li>Προφίλ παρόχου</li>
+                                </span>
+                                <span th:if="${(module=='buypoints')}">
+                                    <li>Aγορά πόντων</li>
+                                </span>
+                                <span th:if="${(module=='error_page')}">
+                                    <li>Λάθος</li>
+                                </span>
+                                <span th:if="${(module=='activityProvider')}">
+                                    <li><a th:href="@{/profileProvider}">Προφίλ Παρόχου</a></li>
+                                    <li>Επισκόπηση Δραστηριότητας</li>
+                                </span>
+                            </span>
+
+                        </ul>
+                        <!-- ################################################################################################ -->
+                    </div>
+                </div>
+            </div>
+            <!-- ################################################################################################ -->
+            <!-- ################################################################################################ -->
+            <!-- ################################################################################################ -->
+            <!-- End Top Background Image Wrapper -->
+
+        </div>
+        <!--- SYNDESI           .............................................................              -->
+        <div class="modal fade" id="login_overlay">
+            <div  class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Κλείσιμο</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Σύνδεση στο KIDDOM</h4>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="logindiv" style="margin:0 auto;">
+                                <div class="well" style="margin-left: 8px; margin-right: 8px">
+                                    <form class="group" id="loginForm" method="POST" th:action="@{/login}" novalidate="novalidate">
+
+                                        <div class="form-group">
+                                            <label for="username" class="control-label">Όνομα Χρήστη</label>
+                                            <input type="text" class="form-control" id="username" name="username" value="" required="required" title="Συμπληρώστε το όνομα χρήστη" placeholder="Όνομα χρήστη">
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password" class="control-label">Κωδικός Χρήστη</label>
+                                            <input type="password" class="form-control" id="password" name="password" value="" required="required" title="Συμπληρώστε τον κωδικό σας" placeholder="Κωδικός χρήστη">
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <div id="loginErrorMsg" class="alert alert-error hidden">Λάθος όνομα ή κωδικός χρήστη</div>
+
+                                        <div  class="form-group" style="display:inline-block">
+                                            <!--div   class="checkbox" >
+                                                <label><input type="checkbox" id="remeber" /> Να με θυμάσαι </label>
+
+                                            </div-->
+                                        </div>
+                                        <button type="submit" class="btn btn-success btn-block">Σύνδεση</button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

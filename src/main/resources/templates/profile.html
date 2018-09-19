@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!--
+Template Name: Maxisonix
+Author: <a href="http://www.os-templates.com/">OS Templates</a>
+Author URI: http://www.os-templates.com/
+Licence: Free to use under our free template licence terms
+Licence URI: http://www.os-templates.com/template-terms
+-->
+<head >
+    <title>Kiddom-Profile</title>
+    <meta th:replace="/fragments/head :: head">
+    <script th:src="@{/scripts/profile.js}"> </script>
+    <style>
+        .container2 {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        @media (min-width: 768px) {
+            .container2 {
+                width: 750px;
+            }
+        }
+        @media (min-width: 992px) {
+            .container2 {
+                width: 970px;
+            }
+        }
+        @media (min-width: 1200px) {
+            .container2 {
+                width: 1170px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
+
+</head>
+
+<body id="top" >
+
+<div th:replace="/fragments/navbar :: navbar('profile')"></div>
+
+
+<div class="wrapper row3" >
+    <main class="mainbodyHoc hoc container clear" >
+        <div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 ">
+            <div class="sidebar one_quarter first">
+                <div class="tab">
+
+                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'user_elements')"  th:id="${((param.tab != null) and (param.tab[0] == 'elements')) ? 'my_active' : ''}">
+                        <i class="fa fa-user" style="color:#cc834f "></i> Στοιχεια Χρήστη</button>
+                    <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'wallet')" th:id="${((param.tab != null) and (param.tab[0] == 'wallet')) ? 'my_active' : ''}">
+                        <i class="fa fa-university" style="color:#cc834f"></i> Πορτοφόλι</button>
+                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'reservations')" th:id="${((param.tab != null)and (param.tab[0] == 'reservations')) ? 'my_active' : ''}">
+                        <i class="fa fa-calendar-check-o" style="color:#cc834f"></i> Kρατήσεις<span class="badge">14</span></button>
+                    <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'old_activities')" th:id="${((param.tab != null) and (param.tab[0] == 'old_activities')) ? 'my_active' : ''}">
+                        <i class="fa fa-calendar-minus-o" style="color:#cc834f;"></i> Παλαιότερες Κρατήσεις </button>
+
+                </div>
+
+            </div>                  <!--one quorter ending-->
+
+
+
+
+            <div class="content three_quarter">
+
+                <div id="user_elements"  class="tabcontent">
+                    <div class="container2">
+                        <div class="panel-body inf-content">
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3 " style='width: 180px' align="center">
+                                    <!--<div th:if="${(parent.photo!= null)}">-->
+                                        <!--<p>KALISPERA</p>-->
+                                        <!--img alt="User Pic"  th:src ="${parent.photo}" class="img-circle img-responsive"-->
+                                    </div>
+                                </div>
+                                <h3 style="text-transform: capitalize; text-align: left;"> Στοιχεία Χρήστη</h3>
+                                <!--</br>-->
+                                <div class=" col-md-9 col-lg-9 ">
+                                    <div class="table-responsive">
+                                        <table class="table table-condensed table-responsive table-user-information" style="width: 75%;">
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-user  text-primary"></span>
+                                                        Όνομα
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    <span th:text="${parent.name}"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-cloud text-primary"></span>
+                                                        Επώνυμο
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    <span th:text="${parent.surname}"></span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                                                        Όνομα Χρήστη
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    <span th:text="${user.username}"></span>
+                                                </td>
+                                            </tr>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-envelope text-primary"></span>
+                                                        Email
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    <span th:text="${parent.email}"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-phone text-primary"></span>
+                                                        Τηλέφωνο
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    <span th:text="${parent.telephone}"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-map-marker text-primary"></span>
+                                                        Περιοχή
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    <span th:text="${parent.area}"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-map-marker text-primary"></span>
+                                                        Πόλη
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    <span th:text="${parent.town}"></span>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style='text-align: center'>
+                            <button class="btn btn-default"  onclick="openCity(event, 'change_form')"> Αλλαγή</button>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div id="change_form" class="tabcontent">
+                    <form class="form-horizontal" enctype="multipart/form-data" method="POST" th:action="@{/edit}">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="name">Όνομα:</label>
+                            <div class="col-sm-10">
+                                <input type="name" class="form-control" id="name" th:placeholder="${parent.name}" name="name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="surname">Επώνυμο:</label>
+                            <div class="col-sm-10">
+                                <input type="name" class="form-control" id="surname" th:placeholder="${parent.surname}" name="surname">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="email">Email:</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="email" th:placeholder="${parent.email}" name="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="area">Περιοχή:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="area" th:placeholder="${parent.area}" name="area">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="area">Πόλη:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="town" th:placeholder="${parent.town}" name="town">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="telephone">Τηλέφωνο:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="telephone" th:placeholder="${parent.telephone}" name="telephone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="password">Password:</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="password" placeholder="**************" name="password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class="control-label col-sm-2" >Φωτογραφία:</label>
+                            <div class="col-sm-10">
+                                <input  type="file" name="uploadingFiles"  >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class=" col-sm-offset-2 col-sm-1">
+                                <button type="submit" class="btn btn-default">Αλλαγή</button>
+                            </div>
+                            <div class="col-sm-offset-2 col-sm-1">
+                                <button type="button" class="btn btn-default" onclick="openCity(event, 'user_elements')">Eπιστροφη</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+
+                <div id="wallet" class="tabcontent">
+                    <h3 style='text-align: center' > Πορτοφολι</h3>
+                    <div class="table-responsive" >
+                        <table class="table" >
+                            <thead>
+                            <tr>
+
+                                <th > Πληρωθέντες πόντοι </th>
+                                <th> Διαθέσιμοι ποντοι </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-primary"> <a th:text="${total_points}"></a></td>
+                                <td class="text-primary"> <a th:text="${avail_points}"></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div style='text-align: center'>
+                            <a th:href="buypoints">
+                                <button class="btn btn-default"  onclick="openCity(event, 'change_form')"> Αγορά πόντων</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="reservations"  class="tabcontent">
+
+                    <!-- ################################################################################################ -->
+
+                    <h2 align="center">Κρατήσεις</h2>
+
+
+                    <div class="group results">
+                        <!--article class="one_third first"-->
+                        <div th:if ="${(currRes!=null)}">
+                            <div th:each="curr, iterStat : ${currRes} " class=" borderedbox inspace-5">
+                                <div class=" borderedbox inspace-5">
+                                    <article >
+                                        <div class="txtwrap">
+                                            <h4 class="heading"><span th:text="${currEvents[iterStat.index].date}"></span></h4>
+                                            <ul class="nospace meta">
+                                                <li><i class="fa fa-user"></i> <a href="#"><span th:text="${currEvents[iterStat.index].name}"></span></a></li>
+                                                <li><i class="fa fa-tag"></i> <a href="#"><span th:text="${currEvents[iterStat.index].category}"></span></a></li>
+                                            </ul>
+                                            <table>
+                                                <tr>
+                                                    <td>Τιμή:</td>
+                                                <td><span th:text="${currEvents[iterStat.index].price}"></span></td>
+                                               </tr>
+                                                <tr>
+                                                    <td>Έναρξη:</td>
+                                                    <td><span th:text="${curr.timeslot_id.startTime}"></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Λήξη:</td>
+                                                    <td><span th:text="${curr.timeslot_id.endTime}"></span></td>
+                                                </tr>
+                                            </table>
+
+                                            <form class="form-horizontal" method="POST" th:action="@{/reservation_cancel/{slotID}(slotID=${curr.reservation_id})}" style="alignment: left;">
+                                                <div class="form-group">
+                                                    <div class=" col-sm-offset-2 col-sm-1">
+                                                        <button type="submit" class="btn btn-default" style="alignment: center;">Ακύρωση κράτησης</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+
+                                            <footer><a th:href="@{/activity/{eventID}(eventID=${currEvents[iterStat.index].id})}">Διαβάστε Περισσότερα &raquo;</a></footer>
+                                        </div>
+                                     </article>
+                                </div>
+                            </div>
+                        </div>
+                        </br>
+                        <div th:if="${(currRes==null)}">
+                            <p> Δεν έχετε κάνει ακόμα κάποια κρατηση!</p>
+                        </div>
+                    </div>
+
+                    <div class="scrollable">
+
+                    </div>
+
+                    </br></br>
+
+
+                    <!-- ################################################################################################ -->
+                </div>
+
+
+
+                <div id="old_activities" class="tabcontent" >
+                    <!-- ################################################################################################ -->
+
+                    <h2 align="center">Παλαιότερες Kρατήσεις</h2>
+
+                    <div class="group results">
+                        <!--article class="one_third first"-->
+                        <div th:if ="${(pastRes!=null)}">
+                            <div th:each="past, iterStat1 : ${pastRes} " class=" borderedbox inspace-5">
+                                <div class=" borderedbox inspace-5">
+                                    <article >
+                                        <figure><img  src="../images/demo/event1.jpg"   style=" width:200px; height:190px;float: left; margin: 0px 15px 15px 0px;" alt=""></a>
+                                            <figcaption>
+                                                <time datetime="2045-04-06T08:15+00:00"><strong>06</strong> <em>Απρ</em></time>
+                                            </figcaption>
+                                        </figure>
+                                        <div class="txtwrap">
+                                            <h4 class="heading"><span th:text="${pastEvents[iterStat1.index].name}"></span></h4>
+                                            <ul class="nospace meta">
+                                                <li><i class="fa fa-tag"></i> <a href="#"><span th:text="${pastEvents[iterStat1.index].category}"></span></a></li>
+                                            </ul>
+                                        </div>
+                                        <footer><a th:href="@{/activity/{eventID}(eventID=${currEvents[iterStat.index].id})}">Διαβάστε Περισσότερα &raquo;</a></footer>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                        </br>
+                        <div th:if="${(pastRes==null)}">
+                            <p> Δεν έχετε κάνει ακόμα κάποια κρατηση!</p>
+                        </div>
+
+                    </div>
+                    <div class="scrollable">
+
+                    </div>
+
+                    </br></br>
+
+
+                    <!-- ################################################################################################ -->
+                </div>
+
+            </div>                  <!--three quorters ending -->
+        </div>
+
+    </main>
+</div>
+
+
+<div th:replace="/fragments/foot :: foot"></div>
+<!-- JAVASCRIPTS -->
+
+
+
+
+
+<script type="text/javascript">
+    document.getElementById("my_active").click();
+</script>
+<script th:src="@{/scripts/menuformobile.js}"></script>
+</body>
+</html>

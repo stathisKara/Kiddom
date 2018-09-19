@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!--
+Template Name: Maxisonix
+Author: <a href="http://www.os-templates.com/">OS Templates</a>
+Author URI: http://www.os-templates.com/
+Licence: Free to use under our free template licence terms
+Licence URI: http://www.os-templates.com/template-terms
+-->
+<head >
+    <title>Provider Profile</title>
+    <meta th:replace="fragments/head :: head">
+    <script th:src="@{/scripts/profile.js}"> </script>
+    <style>
+        .container2 {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        @media (min-width: 768px) {
+            .container2 {
+                width: 750px;
+            }
+        }
+        @media (min-width: 992px) {
+            .container2 {
+                width: 970px;
+            }
+        }
+        @media (min-width: 1200px) {
+            .container2 {
+                width: 1170px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
+</head>
+
+<body id="top">
+
+    <div th:replace="/fragments/navbar :: navbar('profile_prov')"></div>
+
+<div class="wrapper row3" style="background-color:#b7c1ae" >
+    <main class="mainbodyHoc hoc container clear" >
+        <div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 ">
+            <div class="sidebar one_quarter first">
+
+
+
+                <!--<br><br><br><br>-->
+                <div class="tab">
+                    <div class="btn-group">
+                        <button type="button" class="tablinks  list-group-item" onclick="openCity(event, 'user_elements')"th:id="${((param.tab != null) and (param.tab[0] == 'elements')) ? 'my_active' : ''}">
+                            <i class="fa fa-user" style="color:#cc834f "></i> Στοιχεία Χρήστη
+                        </button>
+                        <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'wallet')" th:id="${((param.tab != null) and (param.tab[0] == 'wallet')) ? 'my_active' : ''}">
+                            <i class="fa fa-money" style="color:#cc834f"></i> Πορτοφόλι
+                        </button>
+                        <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'current_activities')" th:id="${((param.tab != null) and (param.tab[0] == 'current_activities')) ? 'my_active' : ''}">
+                            <i class="fa fa-bicycle" style="color:#cc834f"></i> Επισκόπηση Δραστηριοτήτων
+                        </button>
+                        <button type="button" class="tablinks list-group-item" onclick="openCity(event, 'older_activities')" th:id="${((param.tab != null) and (param.tab[0] == 'older_activities')) ? 'my_active' : ''}">
+                            <i class="fa fa-archive" style="color:#cc834f"></i> Παλαιότερες Δραστηριότητες
+                        </button>
+
+                    </div>
+                </div>
+            </div>                  <!--one quorter ending-->
+
+
+            <div class="content three_quarter">
+                <div id="user_elements"  class="tabcontent">
+                    <div class="container2 ">
+                        <div class=" panel-body inf-content">
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3 " style='width: 180px' align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+                                <h3 style="text-transform: capitalize; text-align: left;"> Στοιχεία Χρήστη</h3>
+                                <div class=" col-md-9 col-lg-9 ">
+                                    <!--strong>Πληροφορίες</strong><br-->
+                                    <div class="table-responsive">
+                                        <table class="table table-condensed table-responsive table-user-information" style="width: 75%;">
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-user  text-primary"></span>
+                                                        Όνομα
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    <span th:text="${user.name}"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-cloud text-primary"></span>
+                                                        Επώνυμο
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    <span th:text="${user.surname}"></span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                                                        Όνομα Χρήστη
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    <span th:text="${provider.username}"></span>
+                                                </td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-euro text-primary"></span>
+                                                        ΑΦΜ
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    <span th:text="${user.tr}"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-envelope text-primary"></span>
+                                                        Email
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    <span th:text="${user.email}"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-phone text-primary"></span>
+                                                        Τηλέφωνο
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    <span th:text="${user.telephone}"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-map-marker text-primary"></span>
+                                                        Πόλη
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    <span th:text="${user.town}"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        <span class="glyphicon glyphicon-map-marker text-primary"></span>
+                                                        Περιοχή
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    <span th:text="${user.area}"></span>
+                                                </td>
+                                            </tr>
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style='text-align: center'>
+                            <button class="btn btn-default"  onclick="openCity(event, 'change_form')"> ΑΛΛΑΓΗ </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="change_form" class="tabcontent">
+                    <form class="form-horizontal"  method="POST" th:action="@{/edit_prov}">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="name">Όνομα:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="name"  th:placeholder="${user.name}" name="name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="surname">Επώνυμο:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="surname"  th:placeholder="${user.surname}" name="surname">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="tr">ΑΦΜ:</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="tr" th:placeholder="${user.tr}" name="tr">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="town">Πόλη:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="town" th:placeholder="${user.town}" name="town">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="area">Περιοχή:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="area" th:placeholder="${user.area}" name="area">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="email">Email:</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="email" th:placeholder="${user.email}" name="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="telephone">Τηλέφωνο:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="telephone" th:placeholder="${user.telephone}" name="telephone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="password">Password:</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="password" placeholder="**************" name="password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class=" col-sm-offset-2 col-sm-1">
+                                <button type="submit" class="btn btn-default">Αλλαγή</button>
+                            </div>
+                            <div class="col-sm-offset-2 col-sm-1">
+                                <button type="button" class="btn btn-default" onclick="openCity(event, 'user_elements')">Eπιστροφη</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+                <div id="wallet" class="tabcontent">
+                    <!--change is needen here-->
+                    <h3 style="text-transform: capitalize; text-align: center;"> Πορτοφόλι</h3>
+                    <div class="table-responsive" >
+                        <table class="table" >
+                            <thead>
+                            <tr>
+                                <th > Πληρωθέν ποσό </th>
+                                <th> Χρωστούμενο ποσό </th>
+                                <th> Συνολικο ποσό </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-primary"> <a th:text="${gotten_points}"></a></td>
+                                <td class="text-primary"> <a th:text="${owed_points}"></a></td>
+                                <td class="text-primary"> <a th:text="${total_points}"></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div id="current_activities" class="tabcontent">
+                    <!--change is needed here-->
+                    <h3 style="text-transform: capitalize; text-align: center;"> Επισκόπηση Δραστηριοτήτων</h3>
+                    <div class="table-responsive" >
+                        <div th:if="${(currEventsPhotos != null)}">
+                            <article style="background-color:white;" th:each="currEvent, iterStat : ${currEvents}" class="one_third">
+                                <figure>
+                                    <a href="#"><img th:src="${currEventsPhotos[iterStat.index].photo}" alt=""></a>
+                                </figure>
+                                <div class="txtwrap">
+                                    <br/>
+                                    <h4 class="heading" style="text-transform: capitalize; font-size: 16px; text-align: center;"><a th:href="@{/activityProvider/{eventID}(eventID=${currEvent.id})}">
+                                        <span th:text="${currEvent.name}"></span>
+                                        <span th:text="${currEvent.id}"></span></a>
+                                    </h4>
+                                    <h6 style="text-transform: capitalize; font-size: 14px;  text-align: center;" th:text="${currEvent.description}"></h6>
+                                </div>
+                            </article>
+                        </div>
+                        <div th:if="${(currEvents==null)}">
+                            <div class="alert alert-info" style="text-align: center;">
+                                <strong> Δεν έχετε δημιουργήσει ακόμα κάποια δραστηριότητα!</strong>
+                                <br>Πατήστε <a th:href="@{/activity_reg}">εδώ</a> για να δημιουργήσετε μια καινούρια δραστηριότητα.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="older_activities" class="tabcontent">
+                    <!--change is needed here-->
+                    <h3 style="text-transform: capitalize; text-align: center;"> Παλαιότερες Δραστηριότητες</h3>
+                    <div class="table-responsive" >
+                        <div th:if="${(pastEventsPhotos != null)}">
+                            <article style="background-color:white;" th:each="pastEvent, iterStat : ${pastEvents}" class="one_third">
+                                <figure>
+                                    <a href="#"><img th:src="${pastEventsPhotos[iterStat.index].photo}" alt=""></a>
+                                </figure>
+                                <div class="txtwrap">
+                                    <br/>
+                                    <h4 class="heading" style="text-transform: capitalize; font-size: 16px; text-align: center;"><a th:href="@{/activityProvider/{eventID}(eventID=${pastEvent.id})}">
+                                        <span th:text="${pastEvent.name}"></span></a>
+                                    </h4>
+                                    <h6 style="text-transform: capitalize; font-size: 14px;  text-align: center;" th:text="${pastEvent.description}"></h6>
+                                </div>
+                            </article>
+                        </div>
+                        <div th:if="${(pastEvents==null)}">
+                            <div class="alert alert-info" style="text-align: center;">
+                                <strong> Δεν έχετε δημιουργήσει ακόμα κάποια δραστηριότητα που έχει λήξει!</strong>
+                                <br>Πατήστε <a th:href="@{/activity_reg}">εδώ</a> για να δημιουργήσετε μια καινούρια δραστηριότητα.
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                    <!-- ################################################################################################ -->
+
+            </div>                  <!--three quorters ending -->
+    </main>
+    </div>
+
+
+    <div th:replace="/fragments/foot :: foot"></div>
+
+
+
+<script type="text/javascript">
+    document.getElementById("my_active").click();
+</script>
+    <script>
+        $('<form action="#"><select /></form>').appendTo("#mainav");
+        $("<option />", {selected: "selected", value: "", text: "Μενού"}).appendTo("#mainav select");
+        $("#mainav a").each(function () {
+            var e = $(this);
+            if ($(e).parents("ul ul ul").length >= 1) {
+                $("<option />", {value: e.attr("href"), text: "- - - " + e.text()}).appendTo("#mainav select")
+            } else if ($(e).parents("ul ul").length >= 1) {
+                $("<option />", {value: e.attr("href"), text: "- - " + e.text()}).appendTo("#mainav select")
+            } else if ($(e).parents("ul").length >= 1) {
+                $("<option />", {value: e.attr("href"), text: "" + e.text()}).appendTo("#mainav select")
+            } else {
+                $("<option />", {value: e.attr("href"), text: e.text()}).appendTo("#mainav select")
+            }
+        });
+        $("#mainav select").change(function () {
+            if ($(this).find("option:selected").val() !== "#") {
+                window.location = $(this).find("option:selected").val()
+            }
+        })
+    </script>
+</body>
+</html>

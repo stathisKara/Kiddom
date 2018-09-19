@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<head >
+    <title>Kiddom-Register</title>
+    <meta th:replace="/fragments/head :: head">
+    <link th:href="@{/css/register_new.css}" rel="stylesheet" type="text/css" media="all">
+    <script th:src="@{/scripts/register_new.js}"></script>
+
+    <style type="text/css">
+        @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+        .isa_info, .isa_success, .isa_warning, .isa_error {
+            /*margin: 10px 0px;*/
+            /*padding:12px;*/
+
+        }
+        .isa_info {
+            color: #00529B;
+            background-color: #BDE5F8;
+        }
+        .isa_success {
+            color: #4F8A10;
+            background-color: #DFF2BF;
+        }
+        .isa_warning {
+            color: #9F6000;
+            background-color: #FEEFB3;
+        }
+        .isa_error {
+            color: #D8000C;
+            background-color: #FFBABA;
+        }
+        .isa_info i, .isa_success i, .isa_warning i, .isa_error i {
+            /*margin:10px 22px;*/
+            font-size: inherit;
+            vertical-align:middle;
+        }
+        #loginForm{
+            background-color: rgba(250, 235, 215, 0.17);
+        }
+    </style>
+</head>
+
+
+<body id="top">
+<div th:replace="/fragments/navbar :: navbar('register')"></div>
+
+
+<div class="wrapper row3" >
+
+    <main class="mainbodyHoc hoc container clear" >
+        <div th:if ="${(success != null) and (success == 'true')}">
+            <div class="alert alert-success" style="text-align: center;"> Η εγγραφή σας ολοκληρώθηκε! <br>  <a  th:href="@{/index}">Πίσω στην Αρχική</a></div>
+        </div >
+        <div th:if ="${(success != null) and (success == 'false')}">
+            <div class="alert alert-danger" style="text-align: center;"> Λυπούμαστε ,αλλά το username που χρησιμοποιήσατε δεν είναι διαθέσιμο! <br>  <a  th:href="@{/index}">Πίσω στην Αρχική</a></div>
+        </div >
+        <div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 ">
+            <div id="container"  >
+                <div id="wrapper stepwizard">
+                    <div class="stepwizard-row setup-panel ">
+                        <div class="stepwizard-step">
+                            <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                        </div>
+                        <div class="stepwizard-step">
+                            <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                        </div>
+                    </div>
+                    <br>
+                    <div id="login" >
+                        <form  class="well form-horizontal" id="loginForm" enctype="multipart/form-data" method="POST" th:action="@{/register}"   >
+                            <!--th:action="@{/register}"-->
+                            <div class="row setup-content" id="step-1">
+
+                                <div class="col-md-10">
+                                    <h1 align="center" style="font-weight: bold; color: lightslategrey;">Βημα 1 :Συμπληρωστε τα στοιχεια σας</h1>
+                                    <br/>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Όνομα</label>
+                                        <div class="col-md-4 inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                                <input  name="name" id="name" required="required" placeholder="πχ. Κώστας" class="form-control"  type="text">
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br/>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Επώνυμο</label>
+                                        <div class="col-md-4 inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                                <input  name="surname" id="surname" required="required" placeholder="πχ. Αντωνίου" class="form-control"  type="text">
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Πόλη διαμονής</label>
+                                        <div class="col-md-4 inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                                <input  name="town" id="town" required="required" placeholder="πχ. Αθήνα" class="form-control"  type="text">
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br/>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Περιοχή</label>
+                                        <div class="col-md-4 inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                                                <input  name="area" id="area" required="required" placeholder="πχ. Αργυρούπολη" class="form-control"  type="text">
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Τηλέφωνο</label>
+                                        <div class="col-md-4 inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                                <input  name="telephone" id="telephone" required="required" pattern=".{10}" placeholder="πχ. 6975649578" class="form-control"  type="text"  title="Εισάγετε ένα αποδεκτό τηλέφωνο (κινητό ή σταθερό)!" >
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br/>
+
+                                    <div class="form-group" align="center">
+
+                                        <label  class="photo_upload" >Θα θέλατε να ανεβάσετε μια Φωτογραφία Προφίλ;</label>
+                                        <div class="col-sm-10">
+                                            <input  type="file" name="uploadingFile"  >
+                                        </div>
+                                    </div>
+                                    <br/>
+
+                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Επομενο</button>
+                                </div>
+
+                            </div>
+                            <div class="row setup-content" id="step-2">
+                                <div class="col-md-10">
+                                    <h1 align="center" style="font-weight: bold; color: lightslategrey;">Βημα 2 :Στοιχεια Λογιαρισμου</h1>
+                                    <br/>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Όνομα χρήστη</label>
+                                        <div class="col-md-4 inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                                <input  name="username" id="username" required="required" pattern=".{3,}" placeholder="πχ. mysuperusername" class="form-control"
+                                                        type="text" title="Το όνομα χρήστη πρέπει να περιέχει τουλάχιστον 3 χαρακτήρες">
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <span id="usernameError" class="hidden alert-danger">Το όνομα χρήστη που επιλέξατε χρησιμοποιείται ήδη</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Εmail</label>
+                                        <div class="col-md-4 inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                                <input  name="email" id="email" required="required"   placeholder="πχ. mymail@mail.com" class="form-control" type="email" >
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <span id="emailError" class="hidden alert-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Κωδικός</label>
+                                        <div class="col-md-4 inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                                <input  name="password" id="password" required="required" pattern=".{4,}" placeholder="πχ. X8df!90EO" class="form-control"
+                                                        onchange="form.passwordsignup_confirm.pattern = this.value;" type="password" title="Ο κωδικός χρήστη πρέπει να περιέχει τουλάχιστον 4 χαρακτήρες !">
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <span id="pass1Error" >
+
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Επιβεβαίωση κωδικού</label>
+                                        <div class="col-md-4 inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-ok"></i></span>
+                                                <input  name="passwordsignup_confirm" id="passwordsignup_confirm"  required="required" pattern=".{4,}" placeholder="πχ. X8df!90EO" class="form-control"
+                                                        type="password"  title="Εισάγατε λάθος κωδικό επιβεβαίωσης !">
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <span id="pass2Error" class="hidden"> <div class="isa_error">
+                                                    <i class="fa fa-times-circle"></i>
+                                                    <span> </span>
+                                                </div></span>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn btn-success btn-lg pull-right" id="to_koumpi" type="submit">Εγγραφη <span class="glyphicon glyphicon-send"></span></button>
+                                </div>
+                            </div>
+
+                        </form>
+                        <p class="change_link" style="position: relative;">
+                            Είστε ήδη μέλος ;
+                            <a data-toggle="modal" href="#login_overlay" class="to_register"> Σύνδεση </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div th:replace="/fragments/foot :: foot"></div>
+
+<script th:src="@{/scripts/regErrorCheck.js}" type="application/javascript"></script>
+<script th:src="@{/scripts/menuformobile.js}"></script>
+</body>
+
+</html>

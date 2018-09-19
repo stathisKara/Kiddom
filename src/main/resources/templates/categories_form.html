@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Admin - Επεξεργασία Κατηγοριών Δραστηριοτήτων</title>
+    <meta th:replace="/fragments/head :: head">>
+    <script th:src="@{/scripts/categories.js}"></script>
+
+</head>
+<body>
+<div th:replace="/fragments/navbar :: navbar('activity_reg')"></div>
+
+<form class="well form-horizontal" action="@{/categories_form}" method="POST"  id="contact_form">
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Δημιουργήστε μια νέα κατηγορία!</legend>
+
+        <!-- Text input-->
+
+        <div class="form-group">
+            <label class="col-md-4 control-label">Όνομα κατηγορίας</label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input  name="name" placeholder="Όνομα κατηγορίας" class="form-control"  type="text">
+                </div>
+            </div>
+        </div>
+        <br/>
+        <!-- Text input-->
+
+        <ul id="myList">
+            <li>Coffee</li>
+            <li>Tea</li>
+        </ul>
+        <button onclick="categFunc()">Προσθέστε μια υποκατηγορία</button>
+
+
+        <!-- Button -->
+        <div class="form-group">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-warning" >Αποθήκευση κατηγορίας <span class="glyphicon glyphicon-send"></span></button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
+</div>
+</div><!-- /.container -->
+<div th:replace="/fragments/foot :: foot"></div>
+<script th:src="@{/scripts/menuformobile.js}"></script>
+</body>
+</html>

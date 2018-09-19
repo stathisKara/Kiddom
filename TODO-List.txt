@@ -1,0 +1,61 @@
+Εδώ θα γράψουμε τι μας έχει μείνει να υλοποιήσουμε
+Ό,τι υλοποιείται θα το μαρκάρουμε ως DONE
+για να ξέρουμε σε τι στάδιο βρισκόμαστε και τι μας λείπει.
+
+SOS! --> Να κρατηθεί (και να βελτιωθεί) η δομή της Java
+     --> Όχι ανοργάνωτος και χύμα κώδικας
+
+> Full reporting at the error page - DONE
+
+> Admin: create admin page - DONE
+> Admin: create providers approval form - DONE
+> Admin: create admin interface to get statistics etc - TODO
+
+> Provider: not allowed to create activities if not approved - DONE
+> Provider: finish reports - TODO
+> Provider: fix edit page for activity - DONE
+> Provider: allow event cancelation - DONE
+
+> User: cookies algorithm to create suggestions - TODO
+> User: finish wallet - DONE
+> User: finish reports - TODO
+> User: finish comments - TODO
+> User: fix cancelation - TODO
+> User: search algorithms - TODO
+
+> View: fix colors - TODO
+> View: find a way to upload photos to the server - DONE
+> View: make drop-down lists work properly with data from db - DONE
+> View: unified search results show - almost TODO
+
+> HTML: fix activity form - DONE
+> HTML: fix provider profile - DONE
+> HTML: fix tabs for create activity etc - DONE
+> HTML: fix buypoints - DONE
+
+> SQL: create script to insert all data to db - TODO
+> SQL: connect Elastic to project - TODO
+
+> Login: remember me attribute - TODO --too much
+> Login: show wrong password message in modal in case of failure - DONE
+> Login: fix the download problem - DONE
+
+********Important*****************
+1.Να ολοκληρώσουμε cancelation και διαχείριση πόντων !(καταχωρησεις-επιστροφες) - DONE
+2.Εγγραφη δραστηριοτητας (δεν παιζιε γ καποιο λογο) να βγει η λήξη δρατσηριοτητας - DONE
+3.Ιδια γραμματοσειρά παντού και pattern - DONE
+4.αναζητησεις  ΚΑΙ ΜΕ ΒΑΣΗ ΤΟΠΟΘΕΣΙΑ ->
+5.πιο ξεκαθαρο buy ποιντς (δεν έχει νόημα το αριθμός πακέτων) - DONE
+6.ADMIN - DONE
+7.εκδοση απόδειξης ->
+8.περιορισμούς για κράτηση αν δεν έχουμε λεφτά ->
+9.σχολιασμός σε όσες έχουμε παρευρεθεί εκτός αν ακολουθούμε άλλη πολιτική ->
+10.είπε ότι θα μπορούσαμε να έχουμε clone παλιού event για ν μην κάνουμε αυτό με τα slot - DONE
+
+
+> Register (provider and parent): put clear button and cancel button in form - TODO
+> Register : message when input username is already in use - DONE
+
+> Password Change : Confirm user before changing password? - TODO --too much
+
+> Unit testing!

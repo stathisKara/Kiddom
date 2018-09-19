@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org">
+<html>
+<head >
+    <title>Kiddom-Buy Points</title>
+    <meta th:replace="/fragments/head :: head">
+    <script th:src="@{/scripts/register_new.js}"></script>
+    <script th:src="@{/scripts/wallet.js}"></script>
+
+    <style>
+
+        .form input[type="text"],.form input[type="number"],.mybox select {
+            outline: none;
+            padding: 10px 0;
+            font-size: 13px;
+            border: none;
+            border-bottom: 2px solid #f2f2f2;
+            background: none;
+            font-weight: 600;
+            /*font-family: 'Raleway', sans-serif;*/
+            width:100%;
+        }
+        .control-label {
+            font-size: 13px;
+            color: #00968f;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            /*-webkit-appearance: "Always Show Up/Down Arrows";*/
+            opacity: 1;
+
+        }
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 30px;
+            right: 30px;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            /*background-color: rgb(0,0,0); !* Fallback color *!*/
+            /*background-color: rgba(0,0,0,0.4); !* Black w/ opacity *!*/
+        }
+
+        /* Modal Content */
+        .modal-content {
+            position: relative;
+            /*background-color: #fefefe;*/
+            margin: auto;
+            padding: 0;
+            /*border: 1px solid #888;*/
+            width: 70%;
+            /*box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);*/
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s
+        }
+        /* The Close Button */
+        .close {
+            color: grey;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        select:required:invalid {
+            color: gray;
+        }
+        option[value=""][disabled] {
+            display: none;
+        }
+        option {
+            color: black;
+        }
+
+
+        input{
+            float:left;
+            /*margin-right:30px;*/
+        }
+
+        .form-group{
+            text-align: inherit;
+            background-color: rgba(250, 235, 215, 0.39);
+            padding: 20px;
+            width: 100%;
+            margin: 30px;
+        }
+
+    </style>
+
+</head>
+
+<body id="top">
+<div th:replace="/fragments/navbar :: navbar('buypoints')"></div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- Top Background Image Wrapper -->
+<div th:if ="${(success != null) and (success == 'true')}">
+    <script>
+        window.onload = function () {
+            var modal = document.getElementById('myModal');
+            modal.style.display = "block";
+        }
+    </script>
+</div>
+
+<div class="wrapper row3" >
+    <main class="mainbodyHoc hoc container clear" >
+        <div id="pageintro" class="hoc clear" style="padding:1% 0 1% 0 ">
+            <div id="container"  >
+                <div id="wrapper stepwizard">
+                    <div class="stepwizard-row setup-panel ">
+                        <div class="stepwizard-step">
+                            <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                        </div>
+                        <div class="stepwizard-step">
+                            <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                        </div>
+                    </div>
+
+
+                    <div class="row setup-content" id="step-1">
+                        <div class="col-md-12">
+                            <h1 align="center" style="font-weight: bold; color: lightslategrey;">Βημα 1 :Επιλέξτε πακέτο ή πληκτρολογείστε τον επιθυμητό αριθμό πόντων</h1>
+                            <br/>
+
+
+                            <div class="col-md-4">
+
+                                <div class="form-group">
+                                    <label for="Points">Επιλέξτε εσείς πόσους πόντους θέλετε! Με κάθε 1 ευρώ αγοράζεται 5 πόντους</label>
+                                    <input type="number" min="0" value="0" name="Points" id="quantity4" min="0"  placeholder="Aριθμός πόντων" required="" oninput="calculate()">
+                                </div>
+
+                                <form  class="form-horizontal" id="pointsForm" action="#" method="post"   >
+                                    <!--form class="form" action="#" method="post"-->
+                                    <div class="form-group">
+                                        <!--<label for="quantity"> Πακέτο 1 (260 πόντοι - 50€)</label>-->
+                                        <!--<div class="col-sm-8">-->
+                                        <label for = "quantity" >
+                                            <input type="radio"  id="quantity" class="radios"  onchange="calculate()"> &nbsp;&nbsp;&nbsp; Πακέτο 1
+                                        </label>
+                                        <label> 260 πόντοι - 50€</label>
+                                        <label> Κέρδος: 10 πόντοι </label>
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="form-group">
+                                        <!--<div class="col-sm-8">-->
+                                        <label for = "quantity2" >
+                                            <input type="radio"  id="quantity2" class="radios"  onchange="calculate()"> &nbsp;&nbsp;&nbsp; Πακέτο 2
+                                        </label>
+                                        <label> 530 πόντοι - 100€</label>
+                                        <label> Κέρδος: 30 πόντοι </label>
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="form-group">
+                                        <label for = "quantity3" >
+                                            <input type="radio"  id="quantity3" class="radios"  onchange="calculate()"> &nbsp;&nbsp;&nbsp; Πακέτο 3
+                                        </label>
+                                        <label> 1070 πόντοι - 200€</label>
+                                        <label> Κέρδος: 70 πόντοι </label>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="col-md-4 col-md-offset-2">
+                                <!--<div class="hidden-xs" > <br><br><br> </div>-->
+
+                                <h2 class="col-md-offset-1">Τελική Χρέωση</h2>
+                                <h3 id="cost" style="position: relative;padding:2em; border:1px black solid; text-align: center"> 0€ </h3>
+
+                                <br>
+                                <h2 class="col-md-offset-1"> Τελικοί Πόντοι</h2>
+                                <h3 id="points"  style="position: relative;padding:2em; border:1px black solid; text-align: center"> 0 </h3>
+
+                            </div>
+
+                        </div>
+                        <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Επομενο</button>
+                    </div>
+                    <br>
+
+                    <div class="row setup-content" id="step-2">
+                        <div class="col-md-12">
+                            <h1 align="center" style="font-weight: bold; color: lightslategrey;">Βημα 2 :Ολοκλήρωση Αγοράς Πόντων</h1>
+                            <br/>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li style="text-align: center" class="active" ><a>Τελική πληρωμή &ensp;<span id="points2" class="glyphicon glyphicon-euro"> </span></a></li>
+                            </ul>
+                            <br/>
+
+                                <div class=" col-md-4"  >
+                                <br><br>
+                                <div style="position: relative;padding:5em; background:#f1a700; text-align: center">
+
+                                    <div class=" mybox">
+                                        <select style=" float: right; margin: 0px 0px 0px 0px;" id="payment"  onchange="pr()">
+                                            <option value="1" selected>Πιστωτική κάρτα</option>
+                                            <option value="2">Paypal</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8 "   >
+                                <!--<div class="row">-->
+                                <!--<div class="col-xs-12 col-md-4 col-md-offset-2">-->
+                                <div class="panel panel-default">
+                                    <!--div class="panel-heading">
+                                        <h3 class="panel-title"> ΛΕΠΤΟΜΕΡΕΙΕΣ ΠΛΗΡΩΜΗΣ  </h3>
+                                    </div-->
+                                    <div class="panel-body">
+                                        <form class="well form-horizontal" role="form" method="POST" th:action="@{/pointsBuy}" autocomplete="on">
+                                            <input id="totalcost" name="totalcost" type="number" hidden/>
+                                            <div id="paypal_payment" style="display: none"> <!---->
+                                                <div class="form-group">
+                                                    <label for="username"> Όνομα Χρήστη</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="username" placeholder="Username">
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Email"> Email</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="Email" placeholder="noreply@email.com">
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="credit_payment">
+                                                <div class="form-group" >
+                                                    <label for="cardNumber"> Αριθμός Κάρτας</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="cardNumber" placeholder="Valid Card Number"
+                                                               required >
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-7 col-md-7">
+                                                        <div class="form-group">
+                                                            <label >Ημερομηνία Λήξης</label>
+                                                            <div class="col-xs-6 col-lg-6 pl-ziro">
+                                                                <!--<input type="text" class="form-control" id="expityMonth" placeholder="MM" required / >-->
+                                                                <select class="form-control" id="monthselect" required  >
+                                                                    <option  value="" disabled selected >Μήνας</option>
+                                                                    <option value="Ιανουάριος">01</option>
+                                                                    <option value="Φεβρουάριος">02</option>
+                                                                    <option value="Μάρτιος">03</option>
+                                                                    <option value="Απρίλιος">04</option>
+                                                                    <option value="Μάιος">05</option>
+                                                                    <option value="Ιούνιος">06</option>
+                                                                    <option value="Ιούλιος">07</option>
+                                                                    <option value="Αύγουστος">08</option>
+                                                                    <option value="Σεπτέμβριος">09</option>
+                                                                    <option value="Οκτώβριος">10</option>
+                                                                    <option value="Νοέμβριος">11</option>
+                                                                    <option value="Δεκέμβριος">12</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-xs-6 col-lg-6 pl-ziro">
+                                                                <input type="text" class="form-control" id="expityYear" placeholder="Xρονιά" required /></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-5 col-md-5 pull-right">
+                                                        <div class="form-group">
+                                                            <label for="cvCode">CV CODE</label>
+                                                            <input type="password" class="form-control" id="cvCode" placeholder="CV" required />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-10" style="display: none;">
+                                                <input type="text" class="form-control" id="totalPoints"  name="totalPoints">
+                                                <!--<div type=text" id="totalPoints"  name="totalPoints"> 100 </div>-->
+                                            </div>
+                                            </br>
+                                            <button type="submit" class="btn btn-success btn-lg btn-block">Πληρωμη<span class="glyphicon glyphicon-send"></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--<button   id="myBtn" class="btn btn-success btn-lg btn-block">Πληρωμη</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+
+    <div class="modal-content">
+        <div class="modal-header">
+                    <span class="close" >
+                        <button type="button" class="close" id="closebutton"  aria-hidden="true"  >  X</button>
+                    </span>
+        </div>
+        <div class="modal-body" style="text-align: center">
+            <strong> Η συναλλαγή ολοκληρώθηκε.</strong>
+            <!--<strong> Διαθέτετε <span th:text="${total_points}"></span>  πόντους</strong>-->
+            <br>
+            <a  th:href="@{/profile(tab=wallet)}" class="btn btn-success" role="button" data-dismiss="myModal" > EΠΙΣΤΡΟΦΗ ΣΤΟ ΠΟΡΤΟΦΟΛΙ</a>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    var allRadios = document.getElementsByClassName("radios")
+    var booRadio;
+    var x = 0;
+    for(x = 0; x < allRadios.length; x++){
+
+        allRadios[x].onclick = function(){
+
+            if(booRadio == this){
+                this.checked = false;
+
+                booRadio = null;
+                calculate();
+            }else{
+                booRadio = this;
+            }
+        };
+    }
+
+</script>
+
+
+
+<div th:replace="/fragments/foot :: foot"></div>
+
+
+<script th:src="@{/scripts/menuformobile.js}"></script>
+
+
+</body>
+</html>

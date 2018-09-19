@@ -1,0 +1,11 @@
+body{
+    font-family: Verdana, Geneva, sans-serif!important;
+    font-size:14px!important;
+    /*background-color: whitesmoke!important;*/
+    background-image: url(https://sandbergwallpaper.com/wp-content/uploads/2014/09/577-31_image2-300x300.jpg);;
+    padding-right: 0!important;
+}
+h1, h2, h3, h4,h5, h6{
+    font-family: Verdana, Geneva, sans-serif!important;
+    font-size:17px;
+}
